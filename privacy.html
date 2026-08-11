@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — JigSteps</title>
+<meta name="description" content="JigSteps collects nothing. Here's exactly what that means.">
+<meta property="og:title" content="Privacy Policy — JigSteps">
+<meta property="og:description" content="JigSteps collects nothing. Here's exactly what that means.">
+<meta property="og:image" content="https://jigsteps.app/assets/Logo_Final_Full.svg">
+<meta property="og:url" content="https://jigsteps.app/privacy.html">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+
+  /* ============ TOKENS (matches Home/Guide — locked) ============ */
+  :root{
+    --amber: #FFCB74;
+    --navy: #1F3555;
+    --paleblue: #D6E2EC;
+    --bg: #F6F6F6;
+    --ink: #323E52;
+    --muted: #3D5261;
+    --white: #FFFFFF;
+    --line: #C9D6E0;
+
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Source Sans 3', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+
+    --measure: 42rem;
+  }
+
+  *{ box-sizing: border-box; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.65;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  h1,h2{ font-family: var(--font-display); color: var(--navy); line-height: 1.2; margin: 0; }
+  a{ color: var(--navy); }
+  img{ max-width:100%; display:block; }
+
+  /* ============ TOP BAR — same shell as Home/Guide ============ */
+  .topbar{
+    position: sticky; top:0; z-index: 20;
+    display:flex; align-items:center; gap:.75rem;
+    background: var(--white);
+    border-bottom: 1px solid var(--line);
+    padding: .85rem 1.25rem;
+  }
+  .logo-mark{ width:68px; height:68px; border-radius:12px; flex: none; display:block; }
+  .topbar nav{ margin-left:auto; display:flex; gap:1.6rem; }
+  .topbar nav a{ text-decoration:none; color: var(--ink); font-size:.95rem; font-weight:500; }
+  .topbar nav a:hover{ color: var(--navy); }
+  .topbar nav a.cta{
+    background: var(--navy); color: var(--white); padding:.5rem 1.1rem;
+    border-radius: 6px; font-weight:600;
+  }
+  @media (max-width:700px){ .topbar nav a:not(.cta){ display:none; } }
+
+  /* ============ BETA STRIP — present site-wide during closed testing ============ */
+  .beta-strip{ background: var(--paleblue); color: var(--navy); text-align:center; font-size:.85rem; padding:.55rem 1rem; }
+  .beta-strip a{ color: var(--navy); font-weight:600; }
+
+  main{ max-width: var(--measure); margin: 0 auto; padding: 3rem 2rem 5rem; flex: 1 0 auto; width: 100%; }
+
+  h1{ font-size: 2rem; margin-bottom: .6rem; }
+  .lede{ color: var(--muted); font-size:1.05rem; margin-bottom: 2.5rem; }
+
+  .summary{
+    background: var(--white); border: 1px solid var(--line); border-radius: 12px;
+    padding: 1.4rem 1.6rem; margin-bottom: 2.5rem; font-size: 1rem;
+  }
+  .summary strong{ color: var(--navy); }
+
+  section{ margin-bottom: 2.2rem; }
+  h2{ font-size: 1.2rem; margin-bottom: .6rem; }
+  p{ margin: 0 0 1rem; }
+  p:last-child{ margin-bottom: 0; }
+
+  footer{
+    border-top: 1px solid var(--line); background: var(--white);
+    padding: 2.5rem 2rem; margin-top: 2rem;
+  }
+  .footer-inner{
+    max-width: 1080px; margin: 0 auto; display:flex; justify-content:space-between;
+    align-items:center; flex-wrap:wrap; gap: 1rem;
+  }
+  .footer-links{ display:flex; gap: 1.5rem; }
+  .footer-links a{ text-decoration:none; color: var(--muted); font-size:.9rem; }
+  .footer-links a:hover{ color: var(--navy); }
+  .footer-brand{ font-family: var(--font-mono); font-size:.8rem; color: var(--muted); }
+  .footer-tagline{ font-family: var(--font-mono); font-size:.72rem; color: var(--muted); opacity:.75; margin-top:.15rem; }
+  .footer-copyright{ font-family: var(--font-mono); font-size:.72rem; color: var(--muted); opacity:.6; margin-top:.15rem; }
+
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="home.html" style="display:flex; align-items:center; text-decoration:none;">
+    <img class="logo-mark" src="assets/Logo_Final_Full.svg" alt="JigSteps logo">
+  </a>
+  <nav>
+    <a href="guide.html">Guide</a>
+    <a href="changelog.html">Changelog</a>
+    <a href="contact.html">Contact</a>
+    <a href="home.html#beta-apply" class="cta">Apply for beta testing</a>
+  </nav>
+</div>
+<div class="beta-strip">Currently in closed beta — <a href="home.html#beta-apply">apply to test →</a></div>
+
+<main>
+
+  <h1>Privacy Policy</h1>
+  <p class="lede">The short version: JigSteps collects nothing. No accounts, no analytics, no tracking, no data leaving your device. The rest of this page exists because the Play Store requires a policy — not because there's much to disclose.</p>
+
+  <section>
+    <h2>What JigSteps collects</h2>
+    <p>Nothing. JigSteps runs entirely on your phone. There are no user accounts, no analytics, no advertising, and no background data collection of any kind. The app doesn't know who you are, and has no way to find out.</p>
+  </section>
+
+  <section>
+    <h2>Knife Diary export and import</h2>
+    <p>The Knife Diary can export your records to a CSV file, and import one back in, using your device's own file picker. Where that file ends up — local storage, Google Drive, a USB drive, wherever you point it — is entirely your choice. JigSteps has no visibility into, and no connection to, wherever the file is saved or read from.</p>
+  </section>
+
+  <section>
+    <h2>Google Play Store</h2>
+    <p>JigSteps is distributed and sold through Google Play. Anything related to your Google account, app purchases, or Play Store activity is handled by Google, under <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's own Privacy Policy</a> — not this one.</p>
+  </section>
+
+  <section>
+    <h2>Children's privacy</h2>
+    <p>JigSteps isn't directed at children, and doesn't knowingly collect information from anyone, of any age — since it doesn't collect information from anyone at all.</p>
+  </section>
+
+  <section>
+    <h2>Changes to this policy</h2>
+    <p>If anything here ever changes, this page will be updated directly. There's no mailing list to maintain and no notification to send — JigSteps doesn't collect contact details from users, so this page is the only place the policy lives.</p>
+  </section>
+
+  <section>
+    <h2>Contact</h2>
+    <p>Questions about this policy can be sent to <a href="mailto:support@jigsteps.app">support@jigsteps.app</a>.</p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">JigSteps</div>
+      <div class="footer-tagline">Proudly developed in New Zealand</div>
+      <div class="footer-copyright">© 2026 JigSteps. All rights reserved.</div>
+    </div>
+    <div class="footer-links">
+      <a href="guide.html">Guide</a>
+      <a href="changelog.html">Changelog</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
