@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JigSteps — Grinding support distances, sorted once</title>
+<meta name="description" content="Calculate exact support distances for jig-based grinding — any wheel-type or flat-type grinder, up to five steps per job.">
+<meta property="og:title" content="JigSteps — Grinding support distances, sorted once">
+<meta property="og:description" content="Calculate exact support distances for jig-based grinding — any wheel-type or flat-type grinder, up to five steps per job.">
+<meta property="og:image" content="https://jigsteps.app/assets/Logo_Final_Full.svg">
+<meta property="og:url" content="https://jigsteps.app/home.html">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -37,6 +43,9 @@
     font-family: var(--font-body);
     font-size: 17px;
     line-height: 1.65;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
 
   h1,h2,h3{ font-family: var(--font-display); color: var(--navy); line-height: 1.15; margin: 0; }
@@ -61,7 +70,11 @@
   }
   @media (max-width:700px){ .topbar nav a:not(.cta){ display:none; } }
 
-  main{ max-width: 1080px; margin: 0 auto; padding: 0 2rem; }
+  /* ============ BETA STRIP — present site-wide during closed testing ============ */
+  .beta-strip{ background: var(--paleblue); color: var(--navy); text-align:center; font-size:.85rem; padding:.55rem 1rem; }
+  .beta-strip a{ color: var(--navy); font-weight:600; }
+
+  main{ max-width: 1080px; margin: 0 auto; padding: 0 2rem; flex: 1 0 auto; width: 100%; }
 
   /* ============ SIGNATURE DIVIDER — same arrow language as the Guide ============ */
   .part-break{ display:flex; align-items:center; gap:1rem; margin: 5rem 0 2.5rem; }
@@ -126,21 +139,7 @@
     text-transform:uppercase; color:#8A97A3; display:block; margin-bottom:.5rem;
   }
   .hero .placeholder{ aspect-ratio: 4/5; display:flex; flex-direction:column; justify-content:center; }
-  .hero-shot{
-    width:100%; aspect-ratio: 652/1255; object-fit: contain;
-    /* Position + trailing-space controls — tune these three, nothing else.
-       x: negative = left, positive = right.
-       y: negative = up, positive = down.
-       bottom-pull: negative reclaims the empty space left behind when y moves the image up
-       (transform shifts the image visually but doesn't shrink its reserved layout space —
-       bottom-pull compensates by pulling the row's bottom edge up to close that gap).
-       Start bottom-pull at roughly the same magnitude as y and adjust from there. */
-    --hero-shot-x: -48px;
-    --hero-shot-y: -72px;
-    --hero-shot-bottom-pull: -96px;
-    transform: translate(var(--hero-shot-x), var(--hero-shot-y));
-    margin-bottom: var(--hero-shot-bottom-pull);
-  }
+  .hero-shot{ width:100%; aspect-ratio: 2442/3840; object-fit: contain; border-right: 1px solid var(--line); }
   .gallery .placeholder{ aspect-ratio: 9/16; display:flex; flex-direction:column; justify-content:center; }
   .gallery-shot{ width:100%; aspect-ratio: 1472/3111; object-fit: contain; border-radius: 10px; background: var(--bg); }
 
@@ -192,6 +191,11 @@
   .feature p{ margin:0; color: var(--muted); font-size: .93rem; }
   @media (max-width: 700px){ .feature-grid{ grid-template-columns: 1fr; } }
 
+  /* ============ BETA APPLICATION ============ */
+  .beta-apply{ padding: 1rem 0 2rem; }
+  .beta-apply h2{ font-size:1.7rem; margin-bottom: 1rem; }
+  .beta-apply .lede{ font-size:1.05rem; color: var(--muted); margin-bottom: 1.8rem; }
+
   /* ============ OWNERSHIP & PRIVACY STRIP ============ */
   .assurance{ padding: 1rem 0 2rem; }
   .assurance-grid{
@@ -237,6 +241,7 @@
   .footer-links a:hover{ color: var(--navy); }
   .footer-brand{ font-family: var(--font-mono); font-size:.8rem; color: var(--muted); }
   .footer-tagline{ font-family: var(--font-mono); font-size:.72rem; color: var(--muted); opacity:.75; margin-top:.15rem; }
+  .footer-copyright{ font-family: var(--font-mono); font-size:.72rem; color: var(--muted); opacity:.6; margin-top:.15rem; }
 
   /* ============ DEV NOTE — visible prompt for you, delete before ship ============ */
   .devnote{
@@ -255,16 +260,17 @@
 <!-- Change "banner-yellow" to "banner-navy" above to flip the top banner's colors -->
 
 <div class="topbar">
-  <a href="home.html" style="display:flex; align-items:center; text-decoration:none;">
+  <a href="index.html" style="display:flex; align-items:center; text-decoration:none;">
     <img class="logo-mark" src="assets/Logo_Final_Full.svg" alt="JigSteps logo">
   </a>
   <nav>
     <a href="guide.html">Guide</a>
     <a href="changelog.html">Changelog</a>
     <a href="contact.html">Contact</a>
-    <a href="#" class="cta">Get the app</a>
+    <a href="index.html#beta-apply" class="cta">Apply for beta testing</a>
   </nav>
 </div>
+<div class="beta-strip">Currently in closed beta — <a href="index.html#beta-apply">apply to test →</a></div>
 
 <main>
 
@@ -277,7 +283,7 @@
       <h1>Your jigs. Your steps. Measured, not guessed.</h1>
       <p class="lede">That's JigSteps — plan up to five steps of a multi-stage grind, across whatever powered machines and jigs you own, and get the exact support height for every one, before you start.</p>
       <div class="ctas">
-        <a href="#" class="btn btn-primary">Get JigSteps</a>
+        <a href="#beta-apply" class="btn btn-primary">Apply for beta testing</a>
         <a href="guide.html" class="btn btn-secondary">Read the Guide</a>
       </div>
     </div>
@@ -432,6 +438,27 @@
     </div>
   </section>
 
+  <!-- ============ BETA APPLICATION ============ -->
+  <section class="beta-apply" id="beta-apply">
+    <div class="part-break"><span class="tag">Beta testing</span><svg viewBox="0 0 400 14"><path d="M0,7 H400"/></svg></div>
+    <h2>Want early access?</h2>
+    <p class="lede">JigSteps is heading into closed testing on Google Play before its full public launch. We're looking for around 15 keen people to help us out. If you're selected as a tester, Google Play will make JigSteps available to install directly from your own Play Store app — no separate files, nothing to sideload.</p>
+
+    <div class="assurance-item" style="margin-bottom: 1.2rem;">
+      <h3><span class="icon">✓</span>What to expect</h3>
+      <p>Testing happens entirely through the real Google Play Store — you won't be emailed an app file to install. Once you're added as a tester, Play will show JigSteps in your own Play Store app, and you install it from there like any other app. Nothing unusual, nothing to sideload.</p>
+    </div>
+
+    <div class="assurance-item" style="margin-bottom: 1.8rem;">
+      <h3><span class="icon">✓</span>Timing</h3>
+      <p>There's a short gap between applying and being able to install — testers need to be added to the list first, and access takes a little time to activate on Google's side. We'll email you as soon as you're set up and ready to install.</p>
+    </div>
+
+    <p>To apply, send us the details below and we'll be in touch:</p>
+
+    <a href="mailto:support@jigsteps.app?subject=JigSteps%20beta%20testing%20application&body=Name%3A%0A%0AGoogle%20account%20email%20(the%20one%20linked%20to%20your%20Play%20Store)%3A%0A%0AGrinder(s)%20you%20own%3A%0A%0ACan%20you%20commit%20to%20testing%20this%20app%20for%2014%20days%3F%0A" class="btn btn-primary">Apply for beta testing</a>
+  </section>
+
   <!-- ============ CHANGELOG TEASER ============ -->
   <section>
     <div class="changelog-teaser">
@@ -450,6 +477,7 @@
     <div>
       <div class="footer-brand">JigSteps</div>
       <div class="footer-tagline">Proudly developed in New Zealand</div>
+      <div class="footer-copyright">© 2026 JigSteps. All rights reserved.</div>
     </div>
     <div class="footer-links">
       <a href="guide.html">Guide</a>
