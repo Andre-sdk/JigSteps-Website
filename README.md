@@ -13,12 +13,12 @@ Static HTML/CSS, no build step, no frameworks.
 
 - `index.html` — landing page
 - `guide.html` — full usage guide
-- 'equipment.html' — detailed equipment guide
-- 'calculator.html' — online setup calculator
+- `equipment.html` — detailed equipment guide
+- `calculator.html` — online setup calculator
 - `changelog.html` — release notes
 - `privacy.html` — privacy policy
 - `contact.html` — contact details
-- 'sitemap.html'
+- `sitemap.html`
 - `assets/` — images, diagrams, logo
 
 ## License
