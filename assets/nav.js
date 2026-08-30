@@ -54,10 +54,17 @@
 
     function openDrawer() {
       lastFocused = document.activeElement;
-      drawer.classList.add('is-open');
+
+      // Bring the drawer into layout first (still off-screen, per its
+      // resting transform), force the browser to register that before
+      // triggering the slide-in — otherwise it can just snap into
+      // place with no animation.
+      drawer.classList.add('is-visible');
+      void drawer.offsetWidth;
+
       scrim.hidden = false;
-      // Next frame, so the transition actually runs.
       window.requestAnimationFrame(function () {
+        drawer.classList.add('is-open');
         scrim.classList.add('is-open');
       });
       drawer.setAttribute('aria-hidden', 'false');
@@ -77,8 +84,12 @@
       document.body.classList.remove('nav-open');
       document.removeEventListener('keydown', onKeydown);
 
+      // Wait for the slide-out transition to finish before pulling the
+      // drawer back out of layout entirely (see the is-visible note in
+      // nav.css — this is what keeps it from ever widening the page).
       window.setTimeout(function () {
         scrim.hidden = true;
+        drawer.classList.remove('is-visible');
       }, 220);
 
       if (lastFocused && typeof lastFocused.focus === 'function') {

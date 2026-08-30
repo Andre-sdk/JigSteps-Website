@@ -55,6 +55,19 @@ footer{
 }
 @media (max-width: 700px){
   .nav-toggle{ display: inline-flex; }
+
+  /* Narrow the top-bar CTA so it wraps onto two lines — the button's
+     HTML text uses &nbsp; to glue "Apply"+"for" and "beta"+"testing"
+     into two unbreakable halves, so as long as this is narrower than
+     the full phrase (and wider than either half) it always wraps at
+     exactly that point, regardless of exact font rendering. */
+  .topbar nav a.cta{
+    width: 5.75rem;
+    padding: .5rem .3rem;
+    font-size: .8rem;
+    line-height: 1.3;
+    text-align: center;
+  }
 }
 
 /* ---------------- Backdrop ---------------- */
@@ -73,7 +86,16 @@ footer{
 }
 
 /* ---------------- Drawer ---------------- */
+/* display:none at rest is deliberate, not just the transform below.
+   A position:fixed element pushed off-screen with transform still
+   counts toward the page's scrollable area in some browsers (Firefox
+   in particular) even though it's invisible — which silently widens
+   the whole document sideways. Fully removing it from layout when
+   closed (is-visible toggled by nav.js) avoids that outright; the
+   transform then only has to do the actual slide animation while
+   the drawer is genuinely on screen. */
 .nav-drawer{
+  display: none;
   position: fixed;
   top: 0;
   right: 0;
@@ -84,11 +106,11 @@ footer{
   box-shadow: -10px 0 28px rgba(31, 53, 85, .18);
   transform: translateX(100%);
   transition: transform .24s ease;
-  display: flex;
   flex-direction: column;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
+.nav-drawer.is-visible{ display: flex; }
 .nav-drawer.is-open{ transform: translateX(0); }
 
 .nav-drawer-head{
