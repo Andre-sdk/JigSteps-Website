@@ -52,6 +52,7 @@
 }
 @media (max-width: 600px){
   .shot-row{ flex-direction: column; }
+  .shot-row img{ width: 100%; }
 }
 
 .shot-half{
@@ -59,6 +60,13 @@
   border-radius: 10px;
   display: block;
   margin: 0 auto;
+}
+
+/* The fixed 1.25rem subtracted above eats a bigger slice of a narrow
+   mobile column than it does of the wide desktop one, so shot-half
+   renders a touch smaller, proportionally, on phones. Nudge it back up. */
+@media (max-width: 600px){
+  .shot-half{ width: calc(((86% - 1.25rem) / 2) * 1.05); }
 }
 
   *{ box-sizing: border-box; }
