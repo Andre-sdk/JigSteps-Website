@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
 <title>Setup Calculator — JigSteps</title>
 <meta name="description" content="Measure your T-8 or similar grinder once with a caliper, and get exact Add Machine values for JigSteps — no awkward horizontal measurements needed.">
 <meta property="og:title" content="Setup Calculator — JigSteps">
@@ -258,9 +258,6 @@
     max-width: 1080px; margin: 0 auto; display:flex; justify-content:space-between;
     align-items:center; flex-wrap:wrap; gap: 1rem;
   }
-  .footer-links{ display:flex; gap: 1.5rem; }
-  .footer-links a{ text-decoration:none; color: var(--muted); font-size:.9rem; }
-  .footer-links a:hover{ color: var(--navy); }
   .footer-brand{ font-family: var(--font-mono); font-size:.8rem; color: var(--muted); }
   .footer-tagline{ font-family: var(--font-mono); font-size:.72rem; color: var(--muted); opacity:.75; margin-top:.15rem; }
   .footer-copyright{ font-family: var(--font-mono); font-size:.72rem; color: var(--muted); opacity:.6; margin-top:.15rem; }
@@ -279,8 +276,9 @@
     <a href="equipment.html">Equipment</a>
     <a href="calculator.html" class="active" aria-current="page">Setup Calculator</a>
     <a href="changelog.html">Changelog</a>
+    <a href="privacy.html">Privacy Policy</a>
     <a href="contact.html">Contact</a>
-    <a href="index.html#beta-apply" class="cta">Apply for beta testing</a>
+    <a href="index.html#beta-apply" class="cta">Apply&nbsp;for beta&nbsp;testing</a>
   </nav>
   <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navDrawer" aria-label="Open menu">
     <span></span><span></span><span></span>
@@ -357,14 +355,6 @@
       <div class="footer-brand">JigSteps</div>
       <div class="footer-tagline">Proudly developed in New Zealand</div>
       <div class="footer-copyright">© 2026 JigSteps. All rights reserved.</div>
-    </div>
-    <div class="footer-links">
-      <a href="guide.html">Guide</a>
-      <a href="equipment.html">Equipment</a>
-      <a href="calculator.html">Setup Calculator</a>
-      <a href="changelog.html">Changelog</a>
-      <a href="privacy.html">Privacy Policy</a>
-      <a href="contact.html">Contact</a>
     </div>
   </div>
 </footer>
@@ -543,10 +533,44 @@
     if (e.key === 'Escape') closeModal();
   }
 
+  // Fullscreen API support varies by browser (Android Chrome/Firefox
+  // support it well on an arbitrary element; iOS Safari largely
+  // doesn't) — so this is a "nice to have on top of" the fixed-overlay
+  // approach, never something the modal depends on. Every call is
+  // feature-detected and wrapped so a browser with no support just
+  // quietly skips straight to the plain full-viewport overlay.
+  function requestFs(el){
+    var fn = el.requestFullscreen || el.webkitRequestFullscreen;
+    if (!fn) return;
+    try {
+      var result = fn.call(el);
+      if (result && typeof result.catch === 'function') result.catch(function(){});
+    } catch (e) { /* ignore — modal still works without true fullscreen */ }
+  }
+
+  function exitFs(){
+    var isFs = document.fullscreenElement || document.webkitFullscreenElement;
+    var fn = document.exitFullscreen || document.webkitExitFullscreen;
+    if (!isFs || !fn) return;
+    try {
+      var result = fn.call(document);
+      if (result && typeof result.catch === 'function') result.catch(function(){});
+    } catch (e) { /* ignore */ }
+  }
+
+  function onFullscreenChange(){
+    var isFs = document.fullscreenElement || document.webkitFullscreenElement;
+    // Covers the user exiting fullscreen their own way (back gesture,
+    // browser's own exit control) instead of tapping our close button —
+    // keep the modal state in sync either way.
+    if (!isFs && wrap.classList.contains('is-modal-open')) closeModal();
+  }
+
   function openModal(){
     wrap.classList.add('is-modal-open');
     document.body.classList.add('calc-modal-open');
     document.addEventListener('keydown', onKeydown);
+    requestFs(wrap);
     closeBtn.focus();
   }
 
@@ -554,8 +578,12 @@
     wrap.classList.remove('is-modal-open');
     document.body.classList.remove('calc-modal-open');
     document.removeEventListener('keydown', onKeydown);
+    exitFs();
     thumbBtn.focus();
   }
+
+  document.addEventListener('fullscreenchange', onFullscreenChange);
+  document.addEventListener('webkitfullscreenchange', onFullscreenChange);
 
   thumbBtn.addEventListener('click', openModal);
   closeBtn.addEventListener('click', closeModal);
