@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Setup Calculator — JigSteps</title>
 <meta name="description" content="Measure your T-8 or similar grinder once with a caliper, and get exact Add Machine values for JigSteps — no awkward horizontal measurements needed.">
 <meta property="og:title" content="Setup Calculator — JigSteps">
@@ -168,6 +168,88 @@
   .results-table td:first-child{ font-family: var(--font-mono); color: var(--navy); font-weight:600; width: 2rem; }
   .results-table td:last-child{ color: var(--muted); text-align:right; }
 
+  /* ============ MOBILE: TAP-TO-EXPAND DIAGRAM ============
+     The inline calculator above is designed around ~880px of width
+     and touch targets sized for a mouse — usable on a phone once
+     you're scrolling/pinch-zooming it, but not something you'd want
+     to be dropped straight into. Below 700px we show a plain
+     thumbnail instead, and open the real (same, still-interactive)
+     diagram full-screen when it's tapped. */
+  .calc-thumb{
+    display: none;
+    width: 100%;
+    border: none;
+    padding: 0;
+    background: none;
+    cursor: pointer;
+    text-align: left;
+    margin: 2rem 0 1rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .calc-thumb-frame{
+    position: relative;
+    display: block;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--white);
+  }
+  .calc-thumb-frame img{
+    width: 100%; display: block; pointer-events: none;
+  }
+  .calc-thumb-hint{
+    position: absolute; inset: auto 0 0 0;
+    display: flex; align-items: center; justify-content: center; gap: .5rem;
+    padding: .8rem .75rem;
+    background: linear-gradient(to top, rgba(31,53,85,.85), rgba(31,53,85,0));
+    color: var(--white);
+    font-family: var(--font-mono); font-size: .82rem;
+  }
+  .calc-modal-close{ display: none; }
+  .calc-modal-hint{ display: none; }
+
+  @media (max-width: 700px){
+    .calc-thumb{ display: block; }
+    .calc-wrap{ display: none; }
+
+    .calc-wrap.is-modal-open{
+      display: block;
+      position: fixed;
+      inset: 0;
+      z-index: 95;
+      margin: 0;
+      border: none;
+      border-radius: 0;
+      padding: 3.5rem 1rem 1.5rem;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .calc-modal-close{
+      display: flex;
+      position: fixed;
+      top: .85rem; right: .85rem;
+      z-index: 96;
+      width: 40px; height: 40px;
+      align-items: center; justify-content: center;
+      border: none; border-radius: 8px;
+      background: var(--navy); color: var(--white);
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+
+    .calc-modal-hint{
+      display: block;
+      position: fixed;
+      top: .95rem; left: 1rem;
+      z-index: 96;
+      font-family: var(--font-mono); font-size: .78rem;
+      color: var(--muted);
+    }
+
+    body.calc-modal-open{ overflow: hidden; }
+  }
+
   footer{
     border-top: 1px solid var(--line); background: var(--white);
     padding: 2.5rem 2rem; margin-top: 2rem;
@@ -184,6 +266,7 @@
   .footer-copyright{ font-family: var(--font-mono); font-size:.72rem; color: var(--muted); opacity:.6; margin-top:.15rem; }
 
 </style>
+<link rel="stylesheet" href="assets/nav.css">
 </head>
 <body>
 
@@ -199,8 +282,21 @@
     <a href="contact.html">Contact</a>
     <a href="index.html#beta-apply" class="cta">Apply for beta testing</a>
   </nav>
+  <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navDrawer" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
 </div>
 <div class="beta-strip">Currently in closed beta — <a href="index.html#beta-apply">apply to test →</a></div>
+
+<div class="nav-scrim" id="navScrim" hidden></div>
+<div class="nav-drawer" id="navDrawer" aria-hidden="true">
+  <div class="nav-drawer-head">
+    <img class="nav-drawer-logo" src="assets/Logo_Final_Full.svg" alt="">
+    <button type="button" class="nav-drawer-close" id="navClose" aria-label="Close menu">✕</button>
+  </div>
+  <div class="nav-drawer-links"></div>
+  <div class="nav-drawer-toc" id="navDrawerToc" hidden></div>
+</div>
 
 <main>
 
@@ -225,7 +321,16 @@
     Fields <strong>7</strong> and <strong>10</strong> are outside-to-outside caliper readings — take care to keep caliper both square and parallel to the support and shaft centrelines. Lightly pressing the body of the caliper against the machine casing helps keep it square.
   </div>
 
-  <div class="calc-wrap">
+  <button type="button" class="calc-thumb" id="calcThumbOpen" aria-haspopup="dialog" aria-controls="calcWrap">
+    <span class="calc-thumb-frame">
+      <img src="assets/Calculator_1_T8_setup_diagram.svg" alt="T-8 setup calculator diagram — tap to open the interactive version" draggable="false">
+      <span class="calc-thumb-hint">⤢ Tap to open the interactive diagram</span>
+    </span>
+  </button>
+
+  <div class="calc-wrap" id="calcWrap">
+    <span class="calc-modal-hint">Pinch to zoom, drag to pan</span>
+    <button type="button" class="calc-modal-close" id="calcModalClose" aria-label="Close diagram">✕</button>
     <div class="calc-diagram" id="calcDiagram">
       <img src="assets/Calculator_1_T8_setup_diagram.svg" alt="T-8 setup calculator diagram, showing 10 numbered measurement points and 5 calculated results" draggable="false">
     </div>
@@ -263,6 +368,8 @@
     </div>
   </div>
 </footer>
+
+<script src="assets/nav.js"></script>
 
 <script>
 (function(){
@@ -422,6 +529,36 @@
   }
 
   calculate();
+})();
+</script>
+
+<script>
+(function(){
+  var thumbBtn = document.getElementById('calcThumbOpen');
+  var wrap = document.getElementById('calcWrap');
+  var closeBtn = document.getElementById('calcModalClose');
+  if (!thumbBtn || !wrap || !closeBtn) return;
+
+  function onKeydown(e){
+    if (e.key === 'Escape') closeModal();
+  }
+
+  function openModal(){
+    wrap.classList.add('is-modal-open');
+    document.body.classList.add('calc-modal-open');
+    document.addEventListener('keydown', onKeydown);
+    closeBtn.focus();
+  }
+
+  function closeModal(){
+    wrap.classList.remove('is-modal-open');
+    document.body.classList.remove('calc-modal-open');
+    document.removeEventListener('keydown', onKeydown);
+    thumbBtn.focus();
+  }
+
+  thumbBtn.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
 })();
 </script>
 

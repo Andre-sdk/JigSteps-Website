@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Equipment — JigSteps</title>
 <meta name="description" content="Set up your Machines, Wheels, Support Jigs, Supports, and the Tormek SE-77 — the one-time accurate setup JigSteps' calculations depend on.">
 <meta property="og:title" content="Equipment — JigSteps">
@@ -107,7 +107,6 @@
     border-radius: 6px; font-weight:600;
   }
   @media (max-width:700px){ .topbar nav a:not(.cta){ display:none; } }
-  .nav-toggle{ margin-left:auto; display:none; }
 
   /* ============ BETA STRIP — present site-wide during closed testing ============ */
   .beta-strip{ background: var(--paleblue); color: var(--navy); text-align:center; font-size:.85rem; padding:.55rem 1rem; }
@@ -211,11 +210,11 @@
   /* ============ RESPONSIVE ============ */
   @media (max-width: 880px){
     nav.toc{ display:none; }
-    .nav-toggle{ display:block; }
     main{ padding: 1.6rem 1.25rem 4rem; }
     .part-break{ margin: 3.5rem 0 2rem; }
   }
 </style>
+<link rel="stylesheet" href="assets/nav.css">
 </head>
 <body>
 <div id="page-top" style="height:0;"></div>
@@ -231,8 +230,21 @@
     <a href="contact.html">Contact</a>
     <a href="index.html#beta-apply" class="cta">Apply for beta testing</a>
   </nav>
+  <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navDrawer" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
 </div>
 <div class="beta-strip">Currently in closed beta — <a href="index.html#beta-apply">apply to test →</a></div>
+
+<div class="nav-scrim" id="navScrim" hidden></div>
+<div class="nav-drawer" id="navDrawer" aria-hidden="true">
+  <div class="nav-drawer-head">
+    <img class="nav-drawer-logo" src="assets/Logo_Final_Full.svg" alt="">
+    <button type="button" class="nav-drawer-close" id="navClose" aria-label="Close menu">✕</button>
+  </div>
+  <div class="nav-drawer-links"></div>
+  <div class="nav-drawer-toc" id="navDrawerToc" hidden></div>
+</div>
 
 <div class="shell">
 
@@ -441,6 +453,8 @@
     </div>
   </div>
 </footer>
+
+<script src="assets/nav.js"></script>
 
 <script>
   // TOC hand-off positions, measured from the bottom of .topbar.

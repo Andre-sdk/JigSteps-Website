@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Contact — JigSteps</title>
 <meta name="description" content="Get in touch about JigSteps — support, feedback, or privacy questions.">
 <meta property="og:title" content="Contact — JigSteps">
@@ -107,6 +107,7 @@
   .footer-copyright{ font-family: var(--font-mono); font-size:.72rem; color: var(--muted); opacity:.6; margin-top:.15rem; }
 
 </style>
+<link rel="stylesheet" href="assets/nav.css">
 </head>
 <body>
 
@@ -122,8 +123,21 @@
     <a href="contact.html" class="active" aria-current="page">Contact</a>
     <a href="index.html#beta-apply" class="cta">Apply for beta testing</a>
   </nav>
+  <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navDrawer" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
 </div>
 <div class="beta-strip">Currently in closed beta — <a href="index.html#beta-apply">apply to test →</a></div>
+
+<div class="nav-scrim" id="navScrim" hidden></div>
+<div class="nav-drawer" id="navDrawer" aria-hidden="true">
+  <div class="nav-drawer-head">
+    <img class="nav-drawer-logo" src="assets/Logo_Final_Full.svg" alt="">
+    <button type="button" class="nav-drawer-close" id="navClose" aria-label="Close menu">✕</button>
+  </div>
+  <div class="nav-drawer-links"></div>
+  <div class="nav-drawer-toc" id="navDrawerToc" hidden></div>
+</div>
 
 <main>
 
@@ -159,6 +173,8 @@
     </div>
   </div>
 </footer>
+
+<script src="assets/nav.js"></script>
 
 </body>
 </html>
