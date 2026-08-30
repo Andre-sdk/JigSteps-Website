@@ -69,6 +69,22 @@
   .shot-half{ width: calc(((86% - 1.25rem) / 2) * 1.05); }
 }
 
+/* A pair of un-annotated screenshots shown side by side (e.g. the light/
+   dark theme pair) - each image keeps the same proportional shot-half
+   width (so it still visually matches the annotated screenshots); this
+   wrapper just places two of them next to each other instead of stacking
+   full width. Unlike .shot-row, it does NOT switch to a stacked layout on
+   narrow screens - each image is already small enough to sit side by side.
+   If a given pair still feels cramped on a phone, changing flex-direction
+   to column below stacks them instead, still at their correct small size. */
+.shot-half-row{
+  display: flex;
+  gap: 1.25rem;
+  margin: 1.8rem 0;
+  justify-content: center;
+}
+.shot-half-row .shot-half{ margin: 0; }
+
   *{ box-sizing: border-box; }
   html{ scroll-behavior: smooth; }
   body{
@@ -442,9 +458,9 @@
 	<p>Rockwell HRC, BESS numbers, Grind Angle, Jig Projection and BTE thickness use numerical entries. Date Last Sharpened format is dd-mmm-yyy, for example, 21-Jan-2026. All other fields are free-form text, so you're not constrained to a particular format.</p>
 
 	<figure>
-	  <div class="shot-row">
-	    <img src="assets/Guide_7_add_knife_upper.svg" alt="Add Knife Diary Entry - Upper">
-	    <img src="assets/Guide_8_add_knife_lower.svg" alt="Add Knife Diary Entry - Lower">
+	  <div class="shot-half-row">
+	    <img class="shot-half" src="assets/Guide_7_add_knife_upper.svg" alt="Add Knife Diary Entry - Upper">
+	    <img class="shot-half" src="assets/Guide_8_add_knife_lower.svg" alt="Add Knife Diary Entry - Lower">
 	  </div>
 	  <figcaption>These shown the upper (left) and lower (right) parts of the same page. "Notes" is not shown in lower image for page readability.</figcaption>
 	</figure>
@@ -476,9 +492,9 @@
 	<p>Decimal separator - period (.) or comma (,).</p>
 
 	<figure>
-	  <div class="shot-row">
-	    <img src="assets/Guide_12_theme_light.svg" alt="Light Colour Theme">
-	    <img src="assets/Guide_13_theme_dark.svg" alt="Dark Colour Theme">
+	  <div class="shot-half-row">
+	    <img class="shot-half" src="assets/Guide_12_theme_light.svg" alt="Light Colour Theme">
+	    <img class="shot-half" src="assets/Guide_13_theme_dark.svg" alt="Dark Colour Theme">
 	  </div>
 	<figcaption>Light and Dark colour themes.</figcaption>
 	</figure>
