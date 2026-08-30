@@ -206,7 +206,6 @@
     font-family: var(--font-mono); font-size: .82rem;
   }
   .calc-modal-close{ display: none; }
-  .calc-modal-hint{ display: none; }
 
   @media (max-width: 700px){
     .calc-thumb{ display: block; }
@@ -236,15 +235,6 @@
       background: var(--navy); color: var(--white);
       font-size: 1.1rem;
       cursor: pointer;
-    }
-
-    .calc-modal-hint{
-      display: block;
-      position: fixed;
-      top: .95rem; left: 1rem;
-      z-index: 96;
-      font-family: var(--font-mono); font-size: .78rem;
-      color: var(--muted);
     }
 
     body.calc-modal-open{ overflow: hidden; }
@@ -320,13 +310,12 @@
 
   <button type="button" class="calc-thumb" id="calcThumbOpen" aria-haspopup="dialog" aria-controls="calcWrap">
     <span class="calc-thumb-frame">
-      <img src="assets/Calculator_1_T8_setup_diagram.svg" alt="T-8 setup calculator diagram — tap to open the interactive version" draggable="false">
+      <img src="assets/Calculator_2_T8_thumbnail.svg" alt="T-8 setup calculator diagram — tap to open the interactive version" draggable="false">
       <span class="calc-thumb-hint">⤢ Tap to open the interactive diagram</span>
     </span>
   </button>
 
   <div class="calc-wrap" id="calcWrap">
-    <span class="calc-modal-hint">Pinch to zoom, drag to pan</span>
     <button type="button" class="calc-modal-close" id="calcModalClose" aria-label="Close diagram">✕</button>
     <div class="calc-diagram" id="calcDiagram">
       <img src="assets/Calculator_1_T8_setup_diagram.svg" alt="T-8 setup calculator diagram, showing 10 numbered measurement points and 5 calculated results" draggable="false">
