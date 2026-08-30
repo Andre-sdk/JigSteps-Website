@@ -148,9 +148,7 @@ footer{
   font-weight: 500;
   font-size: 1.02rem;
   padding: .9rem .4rem;
-  border-bottom: 1px solid var(--line);
 }
-.nav-drawer-links nav a:last-of-type{ border-bottom: none; }
 .nav-drawer-links nav a.active{ color: var(--navy); font-weight: 700; }
 .nav-drawer-links nav a.cta{
   order: -1;
@@ -164,22 +162,47 @@ footer{
   font-weight: 600;
 }
 
-/* "On this page" section — only populated (and shown) on pages
-   that have their own in-page contents sidebar, e.g. Equipment/Guide. */
-.nav-drawer-toc{
-  padding: 0 1rem 1.4rem;
-  border-top: 1px solid var(--line);
+/* Divider under each top-level row. Lives on the row itself (rather
+   than the link) so it still works once Guide/Equipment wrap their
+   link together with an expand button below. :last-child matches
+   whichever kind of row — plain <a> or wrapped .nav-drawer-item — is
+   actually last, so only that one loses its divider. */
+.nav-drawer-links nav > a,
+.nav-drawer-links nav > .nav-drawer-item > .nav-drawer-row{
+  border-bottom: 1px solid var(--line);
 }
-.nav-drawer-toc-label{
-  font-family: var(--font-mono);
-  font-size: .72rem;
-  letter-spacing: .06em;
-  text-transform: uppercase;
+.nav-drawer-links nav > a:last-child,
+.nav-drawer-links nav > .nav-drawer-item:last-child > .nav-drawer-row{
+  border-bottom: none;
+}
+
+/* Guide and Equipment: an expand arrow next to the link reveals that
+   page's contents list right underneath, indented — browsable and
+   tappable from any page, not just after already landing on it. */
+.nav-drawer-row{
+  display: flex;
+  align-items: stretch;
+}
+.nav-drawer-row a{ flex: 1; }
+.nav-drawer-expand{
+  flex: none;
+  width: 44px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--muted);
-  padding: 1rem .4rem .3rem;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
-.nav-drawer-toc .part{ margin-bottom: .2rem; }
-.nav-drawer-toc .part-label{
+.nav-drawer-expand-arrow{ transition: transform .18s ease; }
+.nav-drawer-item.is-open .nav-drawer-expand-arrow{ transform: rotate(90deg); }
+
+.nav-drawer-sublist{ padding: 0 .4rem .6rem 1rem; }
+.nav-drawer-sublist .part{ margin-bottom: .2rem; }
+.nav-drawer-sublist .part-label{
   font-family: var(--font-mono);
   font-size: .68rem;
   letter-spacing: .05em;
@@ -187,12 +210,17 @@ footer{
   color: var(--muted);
   padding: .7rem .4rem .1rem;
 }
-.nav-drawer-toc a{
+.nav-drawer-sublist a{
   display: block;
   text-decoration: none;
   color: var(--ink);
   font-size: .92rem;
-  padding: .45rem .4rem .45rem 1rem;
+  padding: .45rem .4rem .45rem .4rem;
+}
+.nav-drawer-sublist-status{
+  padding: .5rem .4rem;
+  font-size: .85rem;
+  color: var(--muted);
 }
 
 /* Lock the page behind the drawer while it's open */

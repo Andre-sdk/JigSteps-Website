@@ -11,6 +11,20 @@
     else document.addEventListener('DOMContentLoaded', fn);
   }
 
+  // Guide and Equipment each have their own in-page contents list
+  // (nav.toc). Rather than hand-duplicate that list into every page,
+  // or only show it once you've already landed on the page, each of
+  // these links gets a small arrow that reveals it right underneath —
+  // browsable and tappable from anywhere on the site. If you're
+  // already on that page, the list comes straight from this page's
+  // own nav.toc; otherwise it's fetched from that page the first time
+  // its arrow is tapped, so there's still only one place that ever
+  // needs editing when a heading changes.
+  var EXPANDABLE_PAGES = [
+    { file: 'guide.html', label: 'Guide' },
+    { file: 'equipment.html', label: 'Equipment' }
+  ];
+
   ready(function () {
     var topbar = document.querySelector('.topbar');
     var toggle = document.getElementById('navToggle');
@@ -25,30 +39,155 @@
     // hrefs, and "active page" highlight are always already correct —
     // one less place to keep in sync by hand.
     var sourceNav = topbar.querySelector('nav');
+    var navClone = null;
     if (sourceNav) {
-      var navClone = sourceNav.cloneNode(true);
+      navClone = sourceNav.cloneNode(true);
       navClone.removeAttribute('id');
       linksHost.appendChild(navClone);
     }
 
-    // Equipment/Guide pages have their own in-page "contents" sidebar
-    // (nav.toc). Fold a copy of it into the drawer under its own
-    // heading. Pages without one simply skip this block.
-    var toc = document.querySelector('nav.toc');
-    var tocHost = document.getElementById('navDrawerToc');
-    if (toc && tocHost) {
-      var label = document.createElement('div');
-      label.className = 'nav-drawer-toc-label';
-      label.textContent = 'On this page';
-
-      var tocClone = toc.cloneNode(true);
-      tocClone.removeAttribute('id');
-      tocClone.classList.remove('toc');
-
-      tocHost.appendChild(label);
-      tocHost.appendChild(tocClone);
-      tocHost.hidden = false;
+    if (navClone) {
+      for (var i = 0; i < EXPANDABLE_PAGES.length; i += 1) {
+        attachExpandable(navClone, EXPANDABLE_PAGES[i]);
+      }
     }
+
+    // ---------------- Guide/Equipment expandable rows ----------------
+
+    function attachExpandable(nav, pageInfo) {
+      var links = nav.querySelectorAll('a');
+      var link = null;
+      for (var i = 0; i < links.length; i += 1) {
+        var href = links[i].getAttribute('href') || '';
+        if (href.indexOf(pageInfo.file) !== -1) {
+          link = links[i];
+          break;
+        }
+      }
+      if (!link) return;
+
+      var item = document.createElement('div');
+      item.className = 'nav-drawer-item';
+
+      var row = document.createElement('div');
+      row.className = 'nav-drawer-row';
+
+      var sublist = document.createElement('div');
+      sublist.className = 'nav-drawer-sublist';
+      sublist.id = 'navSub-' + pageInfo.file.replace('.html', '');
+      sublist.hidden = true;
+
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'nav-drawer-expand';
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-controls', sublist.id);
+      btn.setAttribute('aria-label', 'Show ' + pageInfo.label + ' contents');
+      btn.innerHTML =
+        '<svg class="nav-drawer-expand-arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">' +
+        '<path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>' +
+        '</svg>';
+
+      link.parentNode.insertBefore(item, link);
+      row.appendChild(link);
+      row.appendChild(btn);
+      item.appendChild(row);
+      item.appendChild(sublist);
+
+      var loaded = false;
+      var loading = false;
+
+      btn.addEventListener('click', function () {
+        var isOpen = item.classList.contains('is-open');
+
+        if (isOpen) {
+          item.classList.remove('is-open');
+          sublist.hidden = true;
+          btn.setAttribute('aria-expanded', 'false');
+          return;
+        }
+
+        item.classList.add('is-open');
+        sublist.hidden = false;
+        btn.setAttribute('aria-expanded', 'true');
+
+        if (loaded || loading) return;
+        loading = true;
+        loadSublist(pageInfo, sublist, function () {
+          loaded = true;
+          loading = false;
+        });
+      });
+    }
+
+    function currentFile() {
+      var name = location.pathname.split('/').pop();
+      return name || 'index.html';
+    }
+
+    // Builds the list content for one page's contents into `sublist`.
+    // `sameOrigin` false means these links came from a *different*
+    // page's nav.toc, so their #anchor-only hrefs need that page's
+    // filename put back in front — otherwise tapping one would try to
+    // jump to an anchor on whichever page the drawer is currently open
+    // on, not the page the list actually describes.
+    function fillSublist(sublist, toc, pageFile, sameOrigin) {
+      var clone = toc.cloneNode(true);
+      clone.removeAttribute('id');
+      clone.classList.remove('toc');
+
+      if (!sameOrigin) {
+        var links = clone.querySelectorAll('a');
+        for (var i = 0; i < links.length; i += 1) {
+          var href = links[i].getAttribute('href');
+          if (href && href.charAt(0) === '#') {
+            links[i].setAttribute('href', pageFile + href);
+          }
+        }
+      }
+
+      while (clone.firstChild) {
+        sublist.appendChild(clone.firstChild);
+      }
+    }
+
+    function loadSublist(pageInfo, sublist, done) {
+      if (currentFile() === pageInfo.file) {
+        var localToc = document.querySelector('nav.toc');
+        if (localToc) {
+          fillSublist(sublist, localToc, pageInfo.file, true);
+        } else {
+          sublist.textContent = 'No contents found.';
+        }
+        done();
+        return;
+      }
+
+      var status = document.createElement('div');
+      status.className = 'nav-drawer-sublist-status';
+      status.textContent = 'Loading…';
+      sublist.appendChild(status);
+
+      fetch(pageInfo.file)
+        .then(function (res) { return res.text(); })
+        .then(function (html) {
+          var doc = new DOMParser().parseFromString(html, 'text/html');
+          var toc = doc.querySelector('nav.toc');
+          status.remove();
+          if (toc) {
+            fillSublist(sublist, toc, pageInfo.file, false);
+          } else {
+            sublist.textContent = 'No contents found.';
+          }
+          done();
+        })
+        .catch(function () {
+          status.textContent = 'Could not load contents — open the page directly instead.';
+          done();
+        });
+    }
+
+    // ---------------- Drawer open/close ----------------
 
     var lastFocused = null;
 
@@ -112,7 +251,9 @@
 
     // Tapping any link inside the drawer closes it (the browser will
     // navigate straight after; this just avoids it staying "open" if
-    // the link is an in-page "#" anchor).
+    // the link is an in-page "#" anchor). The expand arrows are
+    // <button>s, not links, so they're untouched by this and never
+    // close the drawer.
     drawer.addEventListener('click', function (e) {
       if (e.target.tagName === 'A') closeDrawer();
     });
