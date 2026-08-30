@@ -1,0 +1,177 @@
+/* ============================================================
+   JigSteps — shared mobile navigation (hamburger + side drawer)
+   Loaded on every page, after that page's own <style> block, so
+   these rules win the cascade on anything they touch.
+   ============================================================ */
+
+/* Safety net: nothing on the page should ever be able to force a
+   sideways scroll of the whole document. Anything that legitimately
+   needs its own horizontal scroll (e.g. the calculator diagram) keeps
+   working, because it scrolls inside its own container, not the page.
+   Deliberately on <html> only, NOT <body>: the root element gets a
+   special "propagate to the viewport" treatment for overflow, so this
+   clips sideways scroll without creating a real scroll box. Adding
+   the same rule to <body> forces the browser to also give it a
+   resolved overflow-y (per the CSS overflow spec, once one axis is
+   non-visible the other can't stay 'visible'), which turns <body>
+   into a second, competing scroll container — and that's exactly
+   what breaks position:sticky elements sized with 100vh (like
+   Equipment/Guide's contents sidebar) and any scroll-position JS
+   that reads window.scrollY expecting the viewport itself to scroll. */
+html{ overflow-x: hidden; }
+
+/* Give the footer breathing room above a phone's home-indicator /
+   gesture bar. Falls back to the page's own bottom padding on
+   devices/browsers that don't report a safe-area inset. */
+footer{
+  padding-bottom: max(2.5rem, calc(env(safe-area-inset-bottom) + 1.2rem));
+}
+
+/* ---------------- Hamburger button ---------------- */
+.nav-toggle{
+  display: none;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.nav-toggle:hover,
+.nav-toggle:focus-visible{ background: var(--paleblue); }
+.nav-toggle span{
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--navy);
+}
+@media (max-width: 700px){
+  .nav-toggle{ display: inline-flex; }
+}
+
+/* ---------------- Backdrop ---------------- */
+.nav-scrim{
+  position: fixed;
+  inset: 0;
+  background: rgba(31, 53, 85, .45);
+  z-index: 90;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .22s ease;
+}
+.nav-scrim.is-open{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ---------------- Drawer ---------------- */
+.nav-drawer{
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(84vw, 340px);
+  background: var(--white);
+  z-index: 91;
+  box-shadow: -10px 0 28px rgba(31, 53, 85, .18);
+  transform: translateX(100%);
+  transition: transform .24s ease;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.nav-drawer.is-open{ transform: translateX(0); }
+
+.nav-drawer-head{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: none;
+  padding: 1rem 1.1rem;
+  border-bottom: 1px solid var(--line);
+}
+.nav-drawer-logo{ width: 40px; height: 40px; border-radius: 9px; display: block; }
+.nav-drawer-close{
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 8px;
+  background: var(--paleblue);
+  color: var(--navy);
+  font-size: 1.05rem;
+  line-height: 1;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* The real <nav> from the top bar gets cloned in here by nav.js,
+   so every link, and the active-page highlight, always matches
+   what's already correct in the page's own top bar. */
+.nav-drawer-links{ padding: .6rem 1rem; }
+.nav-drawer-links nav{ display: flex; flex-direction: column; }
+.nav-drawer-links nav a{
+  display: block;
+  text-decoration: none;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 1.02rem;
+  padding: .9rem .4rem;
+  border-bottom: 1px solid var(--line);
+}
+.nav-drawer-links nav a:last-of-type{ border-bottom: none; }
+.nav-drawer-links nav a.active{ color: var(--navy); font-weight: 700; }
+.nav-drawer-links nav a.cta{
+  order: -1;
+  display: block;
+  text-align: center;
+  background: var(--navy);
+  color: var(--white);
+  border-radius: 8px;
+  border-bottom: none;
+  margin-bottom: .6rem;
+  font-weight: 600;
+}
+
+/* "On this page" section — only populated (and shown) on pages
+   that have their own in-page contents sidebar, e.g. Equipment/Guide. */
+.nav-drawer-toc{
+  padding: 0 1rem 1.4rem;
+  border-top: 1px solid var(--line);
+}
+.nav-drawer-toc-label{
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 1rem .4rem .3rem;
+}
+.nav-drawer-toc .part{ margin-bottom: .2rem; }
+.nav-drawer-toc .part-label{
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: .7rem .4rem .1rem;
+}
+.nav-drawer-toc a{
+  display: block;
+  text-decoration: none;
+  color: var(--ink);
+  font-size: .92rem;
+  padding: .45rem .4rem .45rem 1rem;
+}
+
+/* Lock the page behind the drawer while it's open */
+body.nav-open{ overflow-y: hidden; }
