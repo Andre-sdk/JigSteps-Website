@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Equipment — JigSteps</title>
+<meta name="description" content="Set up your Machines, Wheels, Support Jigs, Supports, and the Tormek SE-77 — the one-time accurate setup JigSteps' calculations depend on.">
+<meta property="og:title" content="Equipment — JigSteps">
+<meta property="og:description" content="Set up your Machines, Wheels, Support Jigs, Supports, and the Tormek SE-77 — the one-time accurate setup JigSteps' calculations depend on.">
+<meta property="og:image" content="https://jigsteps.app/assets/Logo_Final_Full.svg">
+<meta property="og:url" content="https://jigsteps.app/equipment.html">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+
+  /* ============ TOKENS (from Color.kt — locked) ============ */
+  :root{
+    --amber: #FFCB74;      /* PrimaryLight — sparing accent only */
+    --navy: #1F3555;       /* OnPrimaryLight */
+    --paleblue: #D6E2EC;   /* SecondaryLight */
+    --bg: #F6F6F6;         /* BackgroundLight */
+    --ink: #323E52;        /* OnBackgroundLight — body text, softer than navy */
+    --muted: #3D5261;      /* OnSecondaryLight — captions, quiet labels */
+    --white: #FFFFFF;
+    --line: #C9D6E0;
+
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Source Sans 3', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+
+    --measure: 42rem;
+    --nav-w: 240px;
+    --topbar-h: 96px;   /* keep in sync with actual rendered .topbar height */
+  }
+
+.shot-row{
+  display: flex;
+  gap: 1.25rem;
+  margin: 1.8rem 0;
+  align-items: flex-start;
+  width: 86%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.shot-row img{
+  flex: 1;
+  width: 0; /* forces flex children to share space equally regardless of intrinsic size */
+  height: auto;
+  border-radius: 10px;
+}
+@media (max-width: 600px){
+  .shot-row{ flex-direction: column; }
+}
+
+.shot-half{
+  width: calc((86% - 1.25rem) / 2);
+  border-radius: 10px;
+  display: block;
+  margin: 0 auto;
+}
+
+@media (max-width: 600px){
+  .shot-half{ width: 100%; }
+}
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.65;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  h1,h2,h3,h4{ font-family: var(--font-display); color: var(--navy); line-height: 1.2; margin: 0; }
+  a{ color: var(--navy); }
+  img{ max-width:100%; display:block; }
+
+  /* ============ TOP BAR (mobile-first, also holds mobile nav) ============ */
+  .topbar{
+    position: sticky; top:0; z-index: 20;
+    display:flex; align-items:center; gap:.75rem;
+    background: var(--white);
+    border-bottom: 1px solid var(--line);
+    padding: .85rem 1.25rem;
+  }
+  .logo-mark{ width:68px; height:68px; border-radius:12px; flex: none; display:block; }
+  .topbar nav{ margin-left:auto; display:flex; gap:1.6rem; }
+  .topbar nav a{ text-decoration:none; color: var(--ink); font-size:.95rem; font-weight:500; }
+  .topbar nav a:hover{ color: var(--navy); }
+
+  .topbar nav a.active {
+    color: var(--navy);
+    font-weight: 700;
+    box-shadow: inset 0 -3px 0 var(--amber);
+}
+
+  .topbar nav a.cta{
+    background: var(--navy); color: var(--white); padding:.5rem 1.1rem;
+    border-radius: 6px; font-weight:600;
+  }
+  @media (max-width:700px){ .topbar nav a:not(.cta){ display:none; } }
+  .nav-toggle{ margin-left:auto; display:none; }
+
+  /* ============ BETA STRIP — present site-wide during closed testing ============ */
+  .beta-strip{ background: var(--paleblue); color: var(--navy); text-align:center; font-size:.85rem; padding:.55rem 1rem; }
+  .beta-strip a{ color: var(--navy); font-weight:600; }
+
+  footer{
+    border-top: 1px solid var(--line); background: var(--white);
+    padding: 2.5rem 2rem; margin-top: 2rem;
+  }
+  .footer-inner{
+    max-width: 1080px; margin: 0 auto; display:flex; justify-content:space-between;
+    align-items:center; flex-wrap:wrap; gap: 1rem;
+  }
+  .footer-links{ display:flex; gap: 1.5rem; }
+  .footer-links a{ text-decoration:none; color: var(--muted); font-size:.9rem; }
+  .footer-links a:hover{ color: var(--navy); }
+  .footer-brand{ font-family: var(--font-mono); font-size:.8rem; color: var(--muted); }
+  .footer-tagline{ font-family: var(--font-mono); font-size:.72rem; color: var(--muted); opacity:.75; margin-top:.15rem; }
+  .footer-copyright{ font-family: var(--font-mono); font-size:.72rem; color: var(--muted); opacity:.6; margin-top:.15rem; }
+
+  /* ============ LAYOUT ============ */
+  .shell{ display:flex; align-items:flex-start; max-width: 1180px; margin: 0 auto; flex: 1 0 auto; width: 100%; }
+
+  nav.toc{
+    width: var(--nav-w); flex: none;
+    position: sticky; top: var(--topbar-h);
+    height: calc(100vh - var(--topbar-h));
+    overflow-y: auto;
+    padding: 2.5rem 1.25rem 2rem 1.5rem;
+  }
+  nav.toc .part{ margin-bottom: 1.6rem; }
+  nav.toc .part-label{
+    font-family: var(--font-mono); font-size:.72rem; letter-spacing:.06em;
+    color: var(--muted); text-transform: uppercase; margin-bottom:.3rem;
+  }
+  nav.toc a{
+    display:block; text-decoration:none; color: var(--ink);
+    font-size:.92rem; padding: .3rem 0 .3rem .6rem;
+    border-left: 2px solid transparent;
+  }
+  nav.toc a:hover{ color: var(--navy); }
+  nav.toc a.active{
+    border-left: 3px solid var(--amber);
+    color: var(--navy); font-weight:700;
+  }
+
+  main{ flex:1; min-width:0; padding: 2.5rem 2rem 6rem; }
+  .content{ max-width: var(--measure); margin: 0 auto; }
+
+  /* ============ SIGNATURE DIVIDER ============ */
+  .part-break{ display:flex; align-items:center; gap:1rem; margin: 5rem 0 2.5rem; }
+  .part-break:first-of-type{ margin-top: 1rem; }
+  .part-break .tag{
+    font-family: var(--font-mono); font-size:.8rem; color: var(--navy);
+    background: var(--paleblue); padding:.35rem .6rem; border-radius:5px;
+    white-space:nowrap;
+  }
+  .part-break svg{ flex:1; height:14px; overflow:visible; }
+  .part-break path{ stroke: var(--line); stroke-width:2; fill:none; }
+
+  h1{ font-size: 2rem; margin-bottom: .6rem; }
+  h2.part-title{ font-size:1.7rem; margin-bottom:.4rem; }
+  h3{ font-size:1.15rem; margin: 2.2rem 0 .6rem; }
+  h4{ font-size:1rem; font-weight:600; margin: 1.8rem 0 .5rem; }
+  p{ margin: 0 0 1rem; }
+  .lede{ color: var(--muted); font-size:1.05rem; }
+
+  /* ============ FIGURES ============ */
+  figure{ margin: 1.8rem 0; }
+  figure img{ border-radius:10px; }
+  figcaption{
+    font-family: var(--font-mono); font-size:.78rem; color: var(--muted);
+    margin-top:.6rem; text-align:center;
+  }
+
+  .draft-copy{
+    border-left: 3px solid var(--navy);
+    background: var(--paleblue);
+    padding: 1rem 1.2rem;
+    border-radius: 0 8px 0;
+    font-style: italic;
+    color: var(--navy);
+    margin: 1rem 0;
+  }
+  .draft-copy .fix{ font-style:normal; font-family: var(--font-mono); font-size:.85rem; text-transform:uppercase; letter-spacing:.04em; display:block; margin-bottom:.4rem; color: var(--muted); }
+
+  .callout{
+    background: var(--white); border: 1px solid var(--line);
+    border-radius: 10px; padding: 1.1rem 1.3rem; font-size:.92rem; margin: 1.2rem 0;
+  }
+  .callout strong{ color: var(--navy); }
+  .callout ul{ margin: .5rem 0 0; padding-left: 1.2rem; }
+  .callout li{ margin-bottom: .4rem; }
+  .callout li:last-child{ margin-bottom: 0; }
+
+  code, .stat{ font-family: var(--font-mono); }
+
+  /* Anchor targets land clear of the sticky topbar */
+  section[id], h3[id], h4[id]{ scroll-margin-top: calc(var(--topbar-h) + 12px); }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 880px){
+    nav.toc{ display:none; }
+    .nav-toggle{ display:block; }
+    main{ padding: 1.6rem 1.25rem 4rem; }
+    .part-break{ margin: 3.5rem 0 2rem; }
+  }
+</style>
+</head>
+<body>
+<div id="page-top" style="height:0;"></div>
+<div class="topbar">
+  <a href="index.html" style="display:flex; align-items:center; text-decoration:none;">
+    <img class="logo-mark" src="assets/Logo_Final_Full.svg" alt="JigSteps logo">
+  </a>
+  <nav>
+    <a href="guide.html">Guide</a>
+    <a href="equipment.html" class="active" aria-current="page">Equipment</a>
+    <a href="calculator.html">Setup Calculator</a>
+    <a href="changelog.html">Changelog</a>
+    <a href="contact.html">Contact</a>
+    <a href="index.html#beta-apply" class="cta">Apply for beta testing</a>
+  </nav>
+</div>
+<div class="beta-strip">Currently in closed beta — <a href="index.html#beta-apply">apply to test →</a></div>
+
+<div class="shell">
+
+  <nav class="toc" id="toc">
+    <div class="part">
+      <div class="part-label">Part 1</div>
+      <a href="#page-top">Before you start</a>
+    </div>
+    <div class="part">
+      <div class="part-label">Part 2</div>
+      <a href="#equipment">Equipment</a>
+      <a href="#equip-machines">&nbsp;&nbsp;Machines</a>
+      <a href="#equip-machines-wheel">&nbsp;&nbsp;&nbsp;&nbsp;Wheel-Type</a>
+      <a href="#equip-machines-flat">&nbsp;&nbsp;&nbsp;&nbsp;Flat-Type</a>
+      <a href="#equip-wheels">&nbsp;&nbsp;Wheels</a>
+      <a href="#equip-support-jigs">&nbsp;&nbsp;Support Jigs</a>
+      <a href="#equip-supports">&nbsp;&nbsp;Supports</a>
+      <a href="#equip-se77">&nbsp;&nbsp;Tormek SE-77</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="content">
+
+      <h1>Equipment</h1>
+      <p class="lede">The do-right, do-once setup everything else in JigSteps depends on.</p>
+
+      <!-- ============ PART 1 — BEFORE YOU START ============ -->
+      <section id="equip-intro">
+        <div class="part-break"><span class="tag">Part 1</span><svg viewBox="0 0 400 14"><path d="M0,7 H400"/></svg></div>
+        <h2 class="part-title">Before you start</h2>
+
+        <p>Every calculated Support Distance traces straight back to the numbers on this page, so it's worth taking your time here. Come back and adjust anything at any point — nothing here is locked in once you've saved it.</p>
+
+        <div class="callout">
+          <strong>Setup Calculator</strong><br>
+          Getting a wheel-type Machine's fixed horizontal offsets right by direct measurement is genuinely awkward. Our <a href="calculator.html">Setup Calculator</a> turns it into ten relatively straightforward caliper readings and does the geometry for you. It's linked again under Machines below, and links back here when you're done.
+        </div>
+
+        <p>Defaults are loaded for every field except Wheel diameter, based on our own Tormek T-8. <strong>Don't grind using these defaults</strong> — they're placeholders for 'sanity-checks' only, until you enter your own measurements.</p>
+
+        <p>Each category below lets you add, edit, or delete as many items as you need. Every "Add New" page (except Wheels) links to a diagram showing the physical relationships to measure — always measure to the same reference point, perpendicular to each other, in the plane the support moves in.</p>
+
+        <div class="callout">
+          <strong>A note on the diagrams below:</strong> wherever you see a "*" next to a measurement, it marks a gap that isn't measured fresh each time — it's your selected Support's (or Support Jig's) own <strong>Adjustment Nut Thickness</strong>, entered once in that equipment's own setup further down this page. The diagram is just showing you where that gap sits in the chain; you don't need a separate measurement for it here.
+        </div>
+      </section>
+
+      <!-- ============ PART 2 — EQUIPMENT ============ -->
+      <section id="equipment">
+        <div class="part-break"><span class="tag">Part 2</span><svg viewBox="0 0 400 14"><path d="M0,7 H400"/></svg></div>
+        <h2 class="part-title">Equipment</h2>
+
+      <h3 id="equip-machines">Machines</h3>
+      <p>Add both wheel-type and flat-type grinders here — you'll be asked which kind when you tap <strong>+</strong> to add a machine; each is a slightly different setup, covered separately below.</p>
+
+      <figure>
+        <img src="assets/Equipment_1_machines_library.svg" alt="Sample Machines Library">
+	<figcaption>Sample machines library.</figcaption>
+      </figure>
+
+      <h4 id="equip-machines-wheel">Wheel-Type</h4>
+      <p>The diagrams show the relationship between the wheel shaft axis and the point this app calculates support height from ('S'), for both Edge Leading and Edge Trailing. <strong>All dimensions as oriented in the diagrams represent positive numbers.</strong></p>
+
+      <figure>
+	  <img class="shot-half" src="assets/Equipment_2_3_add_new_machine.svg" alt="Add New Machine">
+      </figure>
+
+      <figure>
+	  <img src="assets/Equipment_4_edge_leading_diagram.png" alt="Diagram - Edge Leading Setup">
+	  <figcaption>Dimension C is used for support height warnings.</figcaption>
+      </figure>
+
+      <p>We use the top of the <strong>Adjustment Nut</strong> as the reference point wherever practicable — it's the shortest distance to measure, it's easy to set a caliper square and perpendicular against, and it's always directly accessible (an adjustment nut can otherwise cover a clamp face reference, for both support jigs (with nuts) and supports in edge trailing setups).</p>
+
+      <p>The <strong>Support Clamp Height</strong> (Edge Leading only) is an important distance to get right — avoid 'stacking' errors by following the logic of the Setup Calculator, and let this number be a generated result rather than direct measurement. It's also used in the too-high / too-low support warning calculation.</p>
+
+      <figure>
+	  <img src="assets/Equipment_5_edge_trailing_diagram.png" alt="Diagram - Edge Trailing Setup">
+      </figure>
+
+      <p>The above serves to illustrate why we use the top of the adjustment nut to measure from for the support distance 'S' — it covers the otherwise useful clamp face (this also applies if you use an FVB-type support jig).</p>
+
+      <div class="draft-copy">
+          <span class="fix">If your machine looks different to the above</span>
+          <p>Your grinder doesn't need to look exactly like the ones in the diagrams above — it may not have both edge-leading and edge-trailing features, and the reference point or support may be below the wheel centreline. That doesn't matter — it just needs to share the same measurable relationship to the wheel centreline.</p>
+
+	<p>What matters is determining the best reference point for your machine, and that your two measurements are perpendicular to each other and to the support centreline. If your equipment's geometry runs the "wrong way" relative to the diagram, you don't need different equipment — just flip the sign, using <strong>negative</strong> numbers, as in the worked example below.</p>
+      </div>
+
+      <p><em>Worked example — a slow-speed bench grinder is to be used for honing using paper or felt wheels. A separate mount is fixed to the bench beside <strong>and below</strong> the grinder (in this case on the 'back'-side so edge-trailing), with 'A' = <span class="stat">150&nbsp;mm</span> and 'B' = <span class="stat"><strong>&minus;</strong>100&nbsp;mm</span> (refer the Edge Trailing diagram):</em></p>
+      <div class="callout">
+          <strong>Bench Grinder 1</strong><br>
+          Edge Leading — all fields = <span class="stat">0 </span> <span style="color:var(--muted)">(that is, not used)</span><br>
+          Edge Trailing — Fixed Horizontal = <span class="stat">150</span>, Fixed Vertical = <span class="stat">&minus;100</span>
+      </div>
+
+      <h4 id="equip-machines-flat">Flat-Type</h4>
+      <p>The Add Flat / Belt Machine dialogue and diagram below show this setup is a simple affair. The Vertical Offset default is zero, meaning the reference point by default is at the top of the grinding surface. <strong>All dimensions as oriented in the diagram represent positive numbers.</strong></p>
+
+      <figure>
+	  <img class="shot-half" src="assets/Equipment_6_add_flat_machine.svg" alt="Add New Flat / Belt Machine">
+      </figure>
+
+      <figure>
+	  <img src="assets/Equipment_7_flat_grinder_diagram.png" alt="Diagram - Flat / Belt Grinder Setup">
+      </figure>
+
+      <p>If you identify a more suitable part of your machine from which you want to measure the support height (as long as that point is measured parallel to the grinding surface), enter that as the Vertical Offset. Differing from a wheel-type machine, a point <strong>below</strong> the grinding surface is entered as a <strong>positive</strong> number (and, just in case, use a negative number for above the surface).</p>
+
+      <p>When a flat-type grinder is selected, the <em>Chord</em> grind type becomes unavailable, as this only applies to wheel-type grinders.</p>
+
+      <h3 id="equip-wheels">Wheels</h3>
+      <p>Not much to say here really — it's round so it has a diameter! One convenience is provided for this item; because a bonded wheel changes diameter in use, wheel diameter can be edited directly from the grind step page, not only through the Menu.</p>
+
+      <figure>
+	  <img class="shot-half" src="assets/Equipment_8_add_wheel.svg" alt="Add New Wheel">
+      </figure>
+
+      <h3 id="equip-support-jigs">Support Jigs</h3>
+      <p>Special jigs that, for the purposes of this app, convert horizontal mounts to vertical and so adding grinding flexibility (Tormek MB-102, or third-party equivalents). Available for wheel-type Edge Trailing grind steps only — if you don't have one, leave this field on the grind step page as <strong><em>(none)</em></strong>. We only support calculations for the fixed part of the Tormek MB-102, not the adjustable angle part.</p>
+
+      <figure>
+	  <img class="shot-half" src="assets/Equipment_9_add_new_support_jig.svg" alt="Add New Support Jig">
+      </figure>
+
+      <figure>
+	  <img src="assets/Equipment_10_support_jig_diagram.png" alt="Diagram - Support Jig Setup">
+      </figure>
+
+      <p>The diagram above shows the key geometry relationship of an FVB-type support jig. <strong>Horizontal Offset (A)</strong> and <strong>Vertical Offset (B)</strong> are the jig's fixed geometry, set up once here. <strong>Adjustment Nut Thickness (C)</strong> is the height of this jig's own adjusting nut, if it has one — FVB-type jigs generally do; the Tormek MB-102 doesn't, so this stays at zero and its projection is measured straight to the clamp face instead.</p>
+
+      <p><strong>Support Jig Projection 'X'</strong> is what you always use to set this equipment on the grind step page itself — it's the one measurement here that genuinely changes per grind, which is why it lives on the grind step, not in this one-time setup.</p>
+
+      <figure>
+        <img src="assets/Equipment_11_support_jig_features.svg" alt="Support Jig Features">
+	<figcaption>When a support jig is selected, an additional field appears and a projection 'X' is required (with convenient link to diagram).</figcaption>
+      </figure>
+
+      <h3 id="equip-supports">Supports</h3>
+      <p>The adjustable bar that a blade jig rests on. Tap <strong>Tormek Std</strong> or <strong>Tormek Ext</strong> as many times as the number you own of each — both stay fully editable afterwards, so you can still fine-tune their measurements — or, for anything else, add a <strong>User</strong> support.</p>
+
+	<p>Other than for a flat-type grinder, we have incorporated a clear <strong>TOO HIGH FOR SUPPORT</strong> or <strong>TOO LOW FOR SUPPORT</strong> warning system (more on this below). For Tormek supports you'll get a gentler <strong>"Tormek Ext Support is Required"</strong> nudge if a standard support won't work in a setup, <em>and you have an extended support</em> — to keep this feature intact make sure to leave your Tormek support names as given, and add an identifier after the name if necessary.</p>
+
+      <figure>
+	  <img class="shot-half" src="assets/Equipment_12_add_supports.svg" alt="Add New Support">
+      </figure>
+
+      <figure>
+	  <img src="assets/Equipment_13_support_diagram.png" alt="Diagram - Support Setup">
+      </figure>
+
+      <p>Five fields describe a support: <strong>Diameter (A)</strong>, <strong>Total Leg Length (B)</strong>, <strong>Min Leg Length for Clamp (C)</strong>, <strong>Min Length (D)</strong>, and <strong>Adjustment Nut Thickness (E)</strong> — the height of this support's own adjusting nut, from the clamp face to its top. This one is genuinely almost always non-zero (the default is 6mm, since the great majority of supports have a nut) — it's also the very thing that makes the nut, rather than the clamp face, this app's reference point for 'S'.</p>
+
+      <div class="callout">
+	  The following three fields feed the too-high / too-low warning system:
+	  <ul>
+	    <li><strong>Total Leg Length</strong></li>
+	    <li><strong>Min Leg Length for Clamp</strong> — the least acceptable clamp length you'd accept for a support anywhere on your machine</li>
+	    <li><strong>Min Length</strong> — the lowest your support can physically go</li>
+	  </ul>
+	  <p style="margin: .6rem 0 0;">Adjustment Nut Thickness doesn't change whether a warning triggers — that's still judged against your support's physical Min / Max Height either way — but it does change what 'S' itself reads, since 'S' already includes it.</p>
+      </div>
+
+      <figure>
+	  <img src="assets/Equipment_14_supports_annotated.svg" alt="Supports Page">
+      </figure>
+
+      <h3 id="equip-se77">Tormek SE-77</h3>
+      <p>Special provision is made for this jig, since it shares geometry usable on both wheel and flat-type grinders. If you have this jig, select "I own this jig" to activate it, then check and enter your measured offset dimensions. Selecting it on a grind step makes Jig Neck Width and Double Bevel unavailable — see Blade / Jig Setup and Grind Type in the Guide.</p>
+
+      <figure>
+	  <img class="shot-half" src="assets/Equipment_15_tormek_SE77_jig.svg" alt="Tormek SE-77 Jig">
+      </figure>
+
+      <figure>
+	  <img src="assets/Equipment_16_tormek_SE77_jig_diagram.png" alt="Diagram - Tormek SE-77 Setup">
+	  <figcaption>Measure Jig Projection from the marked face out to the apex of the chisel / plane iron — 'B' is the vertical offset to the face where the top of the chisel / plane iron itself rests, and 'A' is the horizontal offset from the support bar centre.</figcaption>
+      </figure>
+
+      <figure>
+        <img src="assets/Equipment_17_tormek_SE77_page_features.svg" alt="Edge Trailing grind step with the Tormek SE-77 jig selected, showing the locked Jig Neck Width field and disabled Double Bevel option">
+	<figcaption>Features when the Tormek SE-77 Jig is activated.</figcaption>
+      </figure>
+
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">JigSteps</div>
+      <div class="footer-tagline">Proudly developed in New Zealand</div>
+      <div class="footer-copyright">© 2026 JigSteps. All rights reserved.</div>
+    </div>
+    <div class="footer-links">
+      <a href="guide.html">Guide</a>
+      <a href="equipment.html">Equipment</a>
+      <a href="calculator.html">Setup Calculator</a>
+      <a href="changelog.html">Changelog</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // TOC hand-off positions, measured from the bottom of .topbar.
+  // Down: activate a new heading once it reaches this position.
+  // Up: return to the previous heading only when it reaches this position.
+  const DOWN_OFFSET = 112;
+  const UP_OFFSET = 48;
+
+  const tocLinks = Array.from(document.querySelectorAll('nav.toc a'));
+
+  const tocItems = tocLinks
+    .map(link => {
+      const href = link.getAttribute('href');
+
+      if (!href || !href.startsWith('#')) {
+        return null;
+      }
+
+      const target = document.getElementById(href.slice(1));
+
+      return target ? { link, target } : null;
+    })
+    .filter(Boolean);
+
+  let lastScrollY = window.scrollY;
+  let scrollDirection = 'down';
+
+  function getTopbarBottom() {
+    const topbar = document.querySelector('.topbar');
+    return topbar ? topbar.getBoundingClientRect().bottom : 0;
+  }
+
+  function getActiveIndex(readingLine) {
+    let activeIndex = 0;
+
+    for (let index = 0; index < tocItems.length; index += 1) {
+      if (tocItems[index].target.getBoundingClientRect().top <= readingLine) {
+        activeIndex = index;
+      } else {
+        break;
+      }
+    }
+
+    return activeIndex;
+  }
+
+  function updateActiveLink() {
+    const topbarBottom = getTopbarBottom();
+    const offset = scrollDirection === 'down'
+      ? DOWN_OFFSET
+      : UP_OFFSET;
+
+    const activeIndex = getActiveIndex(topbarBottom + offset);
+    const activeLink = tocItems[activeIndex].link;
+
+    tocLinks.forEach(link => {
+ 	link.classList.toggle('active', link === activeLink);
+	});
+
+	activeLink.scrollIntoView({
+	 block: 'nearest',
+	 inline: 'nearest',
+	 behavior: 'auto'
+	});
+  }
+
+  let ticking = false;
+
+  function requestUpdate() {
+    const currentScrollY = window.scrollY;
+
+    if (currentScrollY > lastScrollY) {
+      scrollDirection = 'down';
+    } else if (currentScrollY < lastScrollY) {
+      scrollDirection = 'up';
+    }
+
+    lastScrollY = currentScrollY;
+
+    if (ticking) {
+      return;
+    }
+
+    ticking = true;
+
+    requestAnimationFrame(() => {
+      updateActiveLink();
+      ticking = false;
+    });
+  }
+
+  window.addEventListener('scroll', requestUpdate, { passive: true });
+  window.addEventListener('resize', requestUpdate);
+
+  updateActiveLink();
+</script>
+
+</body>
+</html>

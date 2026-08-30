@@ -62,6 +62,12 @@
   .topbar nav{ margin-left:auto; display:flex; gap:1.6rem; }
   .topbar nav a{ text-decoration:none; color: var(--ink); font-size:.95rem; font-weight:500; }
   .topbar nav a:hover{ color: var(--navy); }
+
+  .topbar nav a.active {
+    color: var(--navy);
+    font-weight: 700;
+    box-shadow: inset 0 -3px 0 var(--amber);
+}
   .topbar nav a.cta{
     background: var(--navy); color: var(--white); padding:.5rem 1.1rem;
     border-radius: 6px; font-weight:600;
@@ -119,8 +125,9 @@
   </a>
   <nav>
     <a href="guide.html">Guide</a>
-    <a href="calculator_T8_setup.html">Setup Calculator</a>
-    <a href="changelog.html">Changelog</a>
+    <a href="equipment.html">Equipment</a>
+    <a href="calculator.html">Setup Calculator</a>
+    <a href="changelog.html" class="active" aria-current="page">Changelog</a>
     <a href="contact.html">Contact</a>
     <a href="index.html#beta-apply" class="cta">Apply for beta testing</a>
   </nav>
@@ -135,10 +142,10 @@
   <div class="entry">
     <div class="entry-head">
       <span class="entry-version">Beta</span>
-      <!-- <span class="entry-title">Initial release</span> --!>
+      <!-- <span class="entry-title">Initial release</span> -->
       <span class="entry-date">[Currently testing]</span>
     </div>
-    <p>This is the closed beta build, available only to invited testers via Google Play. It includes planning up to five grind steps across wheel-type and flat-type grinders, jigs, and supports you own, with the exact support distance calculated for each one — plus the Knife Diary, full equipment library, Tormek SE-77 support, and Metric/Imperial units. Found something odd, or have feedback? Get in touch at support@jigsteps.app.</p>
+    <p>This is the closed beta build, available only to invited testers via Google Play. It includes planning up to five grind steps across wheel-type and flat-type grinders, jigs, and supports you own, with the exact support distance calculated for each one — plus the Knife Diary, full equipment library, Tormek SE-77 support, and Metric / Imperial units. Found something odd, or have feedback? Get in touch at support@jigsteps.app.</p>
   </div>
 
 </main>
@@ -152,7 +159,8 @@
     </div>
     <div class="footer-links">
       <a href="guide.html">Guide</a>
-      <a href="calculator_T8_setup.html">Setup Calculator</a>
+      <a href="equipment.html">Equipment</a>
+      <a href="calculator.html">Setup Calculator</a>
       <a href="changelog.html">Changelog</a>
       <a href="privacy.html">Privacy Policy</a>
       <a href="contact.html">Contact</a>

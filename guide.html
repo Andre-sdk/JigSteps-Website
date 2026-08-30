@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Guide — JigSteps</title>
-<meta name="description" content="The full JigSteps guide — equipment setup, grind steps, and every menu explained with diagrams.">
+<meta name="description" content="The JigSteps guide — what it does, how to get around, and how to use it day to day.">
 <meta property="og:title" content="Guide — JigSteps">
-<meta property="og:description" content="The full JigSteps guide — equipment setup, grind steps, and every menu explained with diagrams.">
+<meta property="og:description" content="The JigSteps guide — what it does, how to get around, and how to use it day to day.">
 <meta property="og:image" content="https://jigsteps.app/assets/Logo_Final_Full.svg">
 <meta property="og:url" content="https://jigsteps.app/guide.html">
 <meta property="og:type" content="website">
@@ -74,7 +74,7 @@
     font-family: var(--font-body);
     font-size: 17px;
     line-height: 1.65;
-    min-height: 100vh;
+    min-height: 100vh;<a href
     display: flex;
     flex-direction: column;
   }
@@ -95,6 +95,13 @@
   .topbar nav{ margin-left:auto; display:flex; gap:1.6rem; }
   .topbar nav a{ text-decoration:none; color: var(--ink); font-size:.95rem; font-weight:500; }
   .topbar nav a:hover{ color: var(--navy); }
+
+  .topbar nav a.active {
+    color: var(--navy);
+    font-weight: 700;
+    box-shadow: inset 0 -3px 0 var(--amber);
+}
+
   .topbar nav a.cta{
     background: var(--navy); color: var(--white); padding:.5rem 1.1rem;
     border-radius: 6px; font-weight:600;
@@ -143,8 +150,8 @@
   }
   nav.toc a:hover{ color: var(--navy); }
   nav.toc a.active{
-    border-left: 2px solid var(--amber);
-    color: var(--navy); font-weight:600;
+    border-left: 3px solid var(--amber);
+    color: var(--navy); font-weight:700;
   }
 
   main{ flex:1; min-width:0; padding: 2.5rem 2rem 6rem; }
@@ -190,17 +197,6 @@
     text-transform:uppercase; color:#8A97A3; display:block; margin-bottom:.5rem;
   }
 
-  /* ============ DEV NOTES — visible prompts-for-add-in, delete before ship ============ */
-  .devnote{
-    border-left: 3px solid var(--amber);
-    background: #FFF8EC;
-    padding: .9rem 1.1rem;
-    border-radius: 0 8px 0;
-    font-size: .88rem;
-    margin: 1.2rem 0;
-  }
-  .devnote .fix{ font-family: var(--font-mono); font-size:.75rem; color:#8A6B1F; text-transform:uppercase; letter-spacing:.04em; display:block; margin-bottom:.35rem; }
-
   .draft-copy{
     border-left: 3px solid var(--navy);
     background: var(--paleblue);
@@ -233,55 +229,49 @@
 </style>
 </head>
 <body>
-
+<div id="page-top" style="height:0;"></div>
 <div class="topbar">
   <a href="index.html" style="display:flex; align-items:center; text-decoration:none;">
     <img class="logo-mark" src="assets/Logo_Final_Full.svg" alt="JigSteps logo">
   </a>
   <nav>
-    <a href="guide.html">Guide</a>
-    <a href="calculator_T8_setup.html">Setup Calculator</a>
+    <a href="guide.html" class="active" aria-current="page">Guide</a>
+    <a href="equipment.html">Equipment</a>
+    <a href="calculator.html">Setup Calculator</a>
     <a href="changelog.html">Changelog</a>
     <a href="contact.html">Contact</a>
     <a href="index.html#beta-apply" class="cta">Apply for beta testing</a>
   </nav>
 </div>
 <div class="beta-strip">Currently in closed beta — <a href="index.html#beta-apply">apply to test →</a></div>
-</div>
 
 <div class="shell">
 
   <nav class="toc" id="toc">
     <div class="part">
       <div class="part-label">Part 1</div>
-      <a href="#getting-started">Getting started</a>
+      <a href="#page-top">Getting started</a>
     </div>
     <div class="part">
       <div class="part-label">Part 2</div>
-      <a href="#navigation">Navigation</a>
+      <a href="#navigation">Getting around</a>
       <a href="#nav-steps">&nbsp;&nbsp;Grind step pages</a>
       <a href="#nav-menu">&nbsp;&nbsp;Menu page</a>
       <a href="#nav-back">&nbsp;&nbsp;Coming back</a>
     </div>
     <div class="part">
       <div class="part-label">Part 3</div>
-      <a href="#using">Using JigSteps</a>
+      <a href="#using">Using JigSteps day to day</a>
       <a href="#equip-grind">&nbsp;&nbsp;Grind steps</a>
       <a href="#equip-blade-jig">&nbsp;&nbsp;Blade / Jig Setup</a>
       <a href="#equip-grind-type">&nbsp;&nbsp;Grind Type</a>
       <a href="#equip-result">&nbsp;&nbsp;Result</a>
       <a href="#equip-variation">&nbsp;&nbsp;First grind check</a>
-      <a href="#equip-menu">&nbsp;&nbsp;Menu items</a>
-      <a href="#equip-setup">&nbsp;&nbsp;Setting up equipment</a>
-      <a href="#equip-machines">&nbsp;&nbsp;Machines</a>
-      <a href="#equip-wheels">&nbsp;&nbsp;Wheels</a>
-      <a href="#equip-support-jigs">&nbsp;&nbsp;Support Jigs</a>
-      <a href="#equip-supports">&nbsp;&nbsp;Supports</a>
-      <a href="#equip-se77">&nbsp;&nbsp;Tormek SE-77</a>
     </div>
     <div class="part">
       <div class="part-label">Part 4</div>
-      <a href="#menu-ref">Menu reference</a>
+      <a href="#menu-ref">Menu page</a>
+      <a href="#ref-equipment">&nbsp;&nbsp;Equipment</a>
       <a href="#ref-diagrams">&nbsp;&nbsp;Diagrams</a>
       <a href="#ref-notes">&nbsp;&nbsp;Notes</a>
       <a href="#ref-diary">&nbsp;&nbsp;Knife Diary</a>
@@ -293,35 +283,39 @@
     <div class="content">
 
       <h1>Guide</h1>
-      <p class="lede">Everything you need to set up your equipment and plan a grind, step by step.</p>
+      <p class="lede">What JigSteps is, how to find your way around, and how to use it day to day.</p>
 
       <!-- ============ PART 1 ============ -->
       <section id="getting-started">
         <div class="part-break"><span class="tag">Part 1</span><svg viewBox="0 0 400 14"><path d="M0,7 H400"/></svg></div>
         <h2 class="part-title">Getting started</h2>
 
-        <p>JigSteps isn't locked to one brand of wheel-type grinder. It's built around the Tormek T-8, but flat-type grinders are included too — if your grinder shares similar geometry to what's shown in the diagrams (Parts 3 and 4), set it up once and use whatever you prefer.</p>
+        <p>JigSteps isn't locked to one brand of wheel-type grinder. It's built around the Tormek T-8, but flat-type grinders are included too — if your grinder shares similar geometry to what's shown in the diagrams, set it up once and use whatever you prefer.</p>
 
-        <p>You can define up to five grinding steps. Your blade/jig setup stays locked across all of them, so results stay consistent from one step to the next.</p>
+        <p>You can define up to five grind steps for one grinding job — coarse / fine / polishing / leather honing / felt wheel deburring (etc) — whatever you want to do, whatever the protocol you need! Your blade / jig setup stays locked across all of them, so results stay consistent from one step to the next.</p>
 
         <div class="callout">
-          <strong>Worth knowing before you start:</strong> every calculation in this app relies on centering jigs to correctly position the blade, where that applies. No allowance is made if the blade isn't centred properly.
+          <strong>This page covers using JigSteps day-to-day.</strong> Getting your equipment set up accurately — the do-right, do-once part everything else depends on — has its own page: <a href="equipment.html">Equipment</a>. There's also a <a href="calculator.html">Setup Calculator</a> that turns the trickier measurements into a caliper exercise rather than a geometry problem.
         </div>
 
-        <p>Setting up your equipment correctly the first time is a do-right, do-once exercise — the next section shows you around the app itself, and Part 3 walks through equipment setup in full.</p>
+        <div class="callout">
+          <strong>Worth knowing before you start:</strong> Every calculation in this app — other than the Tormek SE-77 jig — relies on centring jigs to correctly position the blade, where that applies. No allowance is made if the blade isn't centred properly.
+        </div>
+
+        <p>The rest of this page shows you around the app and walks through a grind step in the order you'll actually use it. When you're ready to set up your own equipment, head to the Equipment page — it's a do-right, do-once exercise.</p>
       </section>
 
       <!-- ============ PART 2 — NAVIGATION ============ -->
       <section id="navigation">
         <div class="part-break"><span class="tag">Part 2</span><svg viewBox="0 0 400 14"><path d="M0,7 H400"/></svg></div>
-        <h2 class="part-title">Navigation</h2>
-        <p class="lede">Two things matter: The grind step pages themselves, front and centre, and everything else tucked behind a single Menu page. We properly explain the grind steps and menu items in Part 3 — for now we'll just look at how to get around this app.</p>
+        <h2 class="part-title">Getting around</h2>
+        <p class="lede">Two things matter: the grind step pages themselves, front and centre, and everything else tucked behind a single Menu page.</p>
 
         <h3 id="nav-steps">Grind step pages</h3>
         <p>Swipe left or right between your grind steps, or tap a step's tab directly. Press and hold a tab to drag and reorder your steps. The <strong>+</strong> icon adds a new step after whichever one you're currently viewing; each step can be deleted individually via the <strong>×</strong> at the top of its page.</p>
 
         <figure>
-          <img src="assets/Part_2_Edge_leading_nav_annotated.svg" alt="Grind step page annotated with the bottom navigation bar, step tabs, and add/delete controls">
+          <img src="assets/Guide_1_edge_leading_nav_annotated.svg" alt="Grind step page annotated with the bottom navigation bar, step tabs, and add/delete controls">
         </figure>
 
 	<p>Swipe the page up to see the calculated result panel.</p>
@@ -329,243 +323,97 @@
        	<p>Tap the ☰ icon at the bottom-left, or swipe up anywhere on the bottom bar itself, to open the Menu page.</p>
 
         <h3 id="nav-menu">Menu page</h3>
-        <p>From here you can reach your equipment library — Machines, Wheels, Support Jigs, Supports, Tormek SE-77 — plus Diagrams, Notes, Knife Diary, Settings / About, and Reset Grind Pages if you want to start over.</p>
+        <p>From here you can reach your equipment library — Machines, Wheels, Support Jigs, Supports, Tormek SE-77, all covered on the <a href="equipment.html">Equipment page</a> — plus Diagrams, Notes, Knife Diary, Settings / About, and Reset Grind Pages.</p>
 
         <figure>
-          <img src="assets/Part_2_Menu_nav_annotated.svg" alt="The Menu sheet, annotated with the tap-behind or swipe-down gesture used to close it">
+          <img src="assets/Guide_2_menu_nav_annotated.svg" alt="The Menu sheet, annotated with the tap-behind or swipe-down gesture used to close it">
         </figure>
-        
+
+        <p><strong>Reset Grind Pages</strong> clears every grind step for a fresh start — your saved equipment library is never touched though. This, and <strong>Restore Defaults</strong> or <strong>Delete</strong> options within the Equipment pages, always asks for confirmation before anything destructive happens.</p>
+
         <h3 id="nav-back">Coming back</h3>
-        <p>Every subsequent Menu page has a back arrow at the top-left that returns you to the Menu itself, rather than all the way back to your grind steps — so you can hop between a few equipment pages in a row without repeatedly re-opening the Menu.</p>
+        <p>Every subsequent Menu page has a back arrow at the top-left that returns you to the Menu itself, rather than all the way back to your grind steps — so you can hop between equipment pages without repeatedly re-opening the Menu.</p>
       </section>
 
-      <!-- ============ PART 3 — USING JIGSTEPS ============ -->
+      <!-- ============ PART 3 — USING JIGSTEPS DAY TO DAY ============ -->
       <section id="using">
         <div class="part-break"><span class="tag">Part 3</span><svg viewBox="0 0 400 14"><path d="M0,7 H400"/></svg></div>
-        <h2 class="part-title">Using JigSteps</h2>
+        <h2 class="part-title">Using JigSteps day to day</h2>
 
 	<h3 id="equip-grind">Grind steps</h3>
         <p>Each main page represents a single grind operation, as part of a full sequential grinding / refinement process (up to 5 steps can be created). So we call each page a grind step, naturally. A grind step can be either edge-leading or edge-trailing, and is selected when each step is created.</p>
 
-	<p>Each grind step page has four sections. Three need your input &mdash; Equipment Setup, Blade / Jig Setup, and Grind Type &mdash; and are shown just below; the fourth, Result, is calculated automatically and is shown further down the page.</p>
+	<p>Every grind step page has four sections. Three need your input — Equipment Setup, Blade / Jig Setup, and Grind Type — and are shown just below; the fourth, Result, is calculated automatically and is shown further down the page.</p>
 
-	<p><strong>Equipment Setup:</strong> Flat / belt grinders are always edge-trailing only, regardless of how they're configured. A wheel-type machine (such as a bench grinder) can also be blocked from edge-leading, but only if its Edge Leading fields are left at zero &mdash; it's the specific configuration that decides this, not the equipment category. <strong>It's always your responsibility to know your own equipment's limitations when setting up.</strong></p>
+	<p><strong>1&nbsp;&nbsp;Equipment Setup:</strong> choose from your library — any combination is fine, though not every combination is valid for every step (a flat / belt grinder machine, for instance, can only be selected for an edge-trailing step).</p>
 
-	<p><strong>Blade / Jig Setup:</strong> Stays physically unchanged across every grind step, right until the process is complete (see also <strong>First grind check</strong> below).</p>
+        <div class="callout">
+          Set your library up once, accurately, from the <strong><a href="equipment.html">Equipment page.</a></strong> Everything else on this page depends on it, and details are handled over there.
+        </div>
 
-	<p><strong>Grind Type:</strong> Select either apex or chord angle, and double or single bevel.</p>
+
+	<p><strong>2&nbsp;&nbsp;Blade / Jig Setup:</strong> Stays physically unchanged across every grind step, right until the job's done (see also <strong>First grind check</strong> below).</p>
+
+	<p><strong>3&nbsp;&nbsp;Grind Type:</strong> Select either apex or chord angle, and double or single bevel.</p>
 
         <figure>
-          <img src="assets/Part_3_Edge_leading_grind_upper_annotated.svg" alt="Grind step page (upper) showing sections">
+          <img src="assets/Guide_3_edge_leading_grind_upper_annotated.svg" alt="Grind step page (upper) showing sections">
 	  <figcaption>Mostly, the parts requiring your input are the selection of equipment, which you pre-defined (once) via the menu.</figcaption>
 	</figure>
 
         <figure>
-          <img src="assets/Part_3_Edge_leading_grind_lower_annotated.svg" alt="Grind steps page (lower) showing result">
+          <img src="assets/Guide_4_edge_leading_grind_lower_annotated.svg" alt="Grind steps page (lower) showing result">
 	  <figcaption>Bottom of the grind step page showing the calculated result.</figcaption>
 	</figure>
 
-        <p><strong>Result:</strong> That last bit of the page is the entire point of the app — see a few sections below for what it's showing you.</p>
-
-        <div class="callout">
-          <strong>Equipment Setup</strong><br>
-          For better readability, this large section is purposely provided last in Part 3, from <strong>Menu items</strong> onwards.<br>
-        </div>
+        <p><strong>4&nbsp;&nbsp;Result:</strong> That last bit of the page is the entire point of the app — see a few sections below for what it's showing you.</p>
 
         <h3 id="equip-blade-jig">Blade / Jig Setup</h3>
-        <p>These fields define your physical blade/jig setup, and stay synchronised across every grind step — set them and they carry through until the job's done.</p>
+        <p>These fields define your physical blade / jig setup, and stay synchronised across every grind step — set them and they carry through until the job's done.</p>
 
-        <p><strong>Target DPS</strong> (Degrees-Per-Side) is the angle on one side only — not the total included angle. <strong>Jig Projection</strong> is measured from the blade edge to the part of the jig that sits behind the support bar; the Tormek SE-77 is the one exception, measured to the <em>front</em> of the jig instead, because of its shape (see its diagram below). <strong>BTE Thickness</strong> (Behind-The-Edge) is the thickness behind the bevel itself, at the shoulder. <strong>Jig Neck Width</strong> is the width — or diameter — of the jig where it contacts the support bar, assumed symmetrical either side of the blade centreline; selecting the Tormek SE-77 makes this field unavailable, since its own geometry is used instead.</p>
+        <p><strong>Target DPS</strong> (Degrees-Per-Side) is the angle on one side only — not the total included angle. <strong>Jig Projection</strong> is measured from the blade edge to the part of the jig that sits behind the support bar; the Tormek SE-77 is the one exception, measured to the <em>front</em> of the jig instead, because of its shape (see its diagram on the Equipment page). <strong>BTE Thickness</strong> (Behind-The-Edge) is the thickness behind the bevel itself, at the shoulder. <strong>Jig Neck Width</strong> is the width — or diameter — of the jig where it contacts the support bar, assumed symmetrical either side of the blade centreline; selecting the Tormek SE-77 makes this field unavailable, since its own geometry is used instead.</p>
 
         <h3 id="equip-grind-type">Grind Type</h3>
         <p>Choose <em>Apex</em> or <em>Chord</em>, combined with <em>Double Bevel</em> or <em>Single Bevel</em>. <em>Chord</em> is unavailable on flat-type grinders, since apex and chord angles are identical without wheel curvature to correct for. <em>Double Bevel</em> is unavailable if you've selected the Tormek SE-77, as this jig is built for single-bevel work only.</p>
-        <p><em>Apex</em> is the true angle at the very edge of the blade. <em>Chord</em> is the angle across the flat line where the bevel first touches the wheel and where it leaves — always very slightly larger than apex, since grinding against a curved wheel puts a slight curve into the bevel (on a flat-type grinder the two are always identical). The app shows you both, plus the difference between them — handy if you want to grind a chord angle as a guide for a hand-applied apex micro-bevel afterwards, useful on thicker blades like chisels.</p>
+        <p><em>Apex</em> is the true angle at the very edge of the blade. <em>Chord</em> is the angle across the flat line where the bevel first touches the wheel and where it leaves — and is always slightly larger than apex. The app shows you both, plus the difference between them — handy if you want to grind a chord angle as a guide for a hand-applied apex micro-bevel afterwards, useful on thicker blades like chisels.</p>
 
         <h3 id="equip-result">Result</h3>
-        <p>This is the entire point of the app. The <span class="stat">Support Distance 'S'</span> is the distance from your equipment's reference point to the outermost part of your support.</p>
-        <p>If your setup would sit the support too high or too low, you'll see a clear <strong>TOO HIGH FOR SUPPORT</strong> or <strong>TOO LOW FOR SUPPORT</strong> warning — flat-type grinder setups don't use this check. If your Tormek Std support won't reach but your Tormek Ext would, you'll get a gentler <strong>"Tormek Ext Support is Required"</strong> nudge instead. Fix any warning by adjusting your Support, Support Jig Projection, or Jig Projection.</p>
-        <p>Seeing only <strong>"— mm"</strong> or <strong>"— inch"</strong>? You've missed an equipment selection somewhere above.</p>
+        <p>This is the entire point of the app. The <span class="stat">Support Distance 'S'</span> is the calculated distance to be measured from your equipment's reference point to the outermost part of your support. That reference point is, in almost all cases, the top of your support's adjusting nut — 'S' already accounts for it, and all other geometry used to get there. Please study the diagrams to fully understand measurement and reference points.</p>
 
+	<p>Below the support distance result is additional angle information that compares to the selected grind type (apex or chord), including the difference (&#x0394;) between them.</p>
+
+	<p>To help with your setup, on occasions the support distance area has a message for your attention. These messages can be instead of, or with, the calculated distance:</p>
+
+	<p><strong>Equipment Selection Incomplete</strong> — you've missed equipment in the Equipment Setup (also on starting a new grind step).</p>
+
+        <p><strong>TOO HIGH FOR SUPPORT</strong> or <strong>TOO LOW FOR SUPPORT</strong> — your setup results in a support that is physically too high or too low to work (flat-type grinder setups don't use this check though). Some of the values in a support setup are used for this check — read more in the <a href="equipment.html">Equipment page</a>. If a Tormek Std support won't work but a longer Tormek Ext would, and you have this, you'll get a gentler <strong>"Tormek Ext Support is Required"</strong> nudge instead. Fix any warning by adjusting your Support, Support Jig Projection, or Jig Projection.</p>
+
+	<p><strong>Setup Not Achieveable</strong> — the setup creates invalid geometry that cannot be solved.
+
+	<p><strong>Calculate</strong> — this may occasionally appear and if so, just tap to continue.
+        
         <h3 id="equip-variation">First grind check</h3>
-	<p><strong>Worth re-checking after your first grind step:</strong> When a burr is developed, and especially after re-profiling a secondary bevel or re-shaping an edge, the angle you actually produce can drift from your target. Check and adjust (if necessary) the <strong>Jig Projection</strong> for that step to bring it back — this will produce a slightly lower <strong>Support Distance 'S'</strong>, so plan on a final light pass at the new setting to finish the step properly. The new <strong>Jig Projection</strong> will carry for all remaining refinement steps.
-
-	<h3 id="equip-menu">Menu items</h3>
-	<p>The first five main menu items all record your grinding equipment (jig-based powered wheel or flat-type grinders), and all the complementary accessories and supports you already have and use (the fifth being a specialised jig, if you own this). These items must be properly defined by you (do-right, do-once) in order to assure the very best results.</p>
-
-	<p>We've put a <strong>Reset Grind Pages</strong> here too, out of the way of the main grind pages (this will clear all grind steps; however, your equipment information is always safe). This, and <strong>Restore Defaults</strong> or <strong>Delete</strong> options (within menu pages), all have warning dialogues to confirm you want to proceed.</p>
-
-	<p>All other items are explained in more detail later in Part 3.</p>
-
-        <figure>
-          <img src="assets/Part_3_Menu_annotated.svg" alt="The Menu sheet, showing the equipment library, Tormek SE-77, and non-equipment items grouped separately">
-	  <figcaption>The full Menu sheet — equipment library, Tormek SE-77, and everything else.</figcaption>
-	</figure>
-
-        <h3 id="equip-setup">Setting up your equipment</h3>
-        <p>The key to getting the best results from this app is to accurately establish all the equipment you have, in the appropriate library, under the Menu. This is a do-right, do-once exercise. Defaults are loaded for every field except wheel diameter, based on our own Tormek T-8 — <strong>don't use these for actual grinding</strong>, they're there to inform only.</p>
-
-        <figure>
-          <img src="assets/Part_3_Setting_up_equipment_annotated.svg" alt="Machines list showing sample equipment with edit and delete controls">
-          <figcaption>Typical for all four equipment lists (Machines, Wheels, Support Jigs, Supports) — the list/add/edit/delete pattern is identical across all of them.</figcaption>
-        </figure>
-
-        <h3 id="equip-machines">Machines</h3>
-        <p>Both wheel-type and flat-type grinders are supported by the app. When adding a new machine, you will be given a choice of type and then taken to the relevant setup.</p>
-
-	<p><strong>For wheel-type grinders</strong> (both edge-leading and edge-trailing), the diagrams below show various dimension that this app uses to calculate support height (<strong>all dimensions as oriented in diagrams represent positive numbers</strong>). All diagrams are included in the app, and links are provided wherever these will help you.</p>
-
-	<figure>
-	  <div class="shot-row">
-	    <img src="assets/Part_3_Add_new_machine_upper.svg" alt="Add New Machine - Upper">
-	    <img src="assets/Part_3_Add_new_machine_lower.svg" alt="Add New Machine - Lower">
-	  </div>
-	  <figcaption>These shown the upper (left) and lower (right) parts of the same page.</figcaption>
-	</figure>
-
-	<figure>
-	  <img src="assets/Part_3_Edge_leading_diagram.png" alt="Diagram - Edge Leading Setup">
-	<figcaption>(Dimension C is used for support height warnings)</figcaption>
-	</figure>
-
-        <p><strong>Support Clamp Height</strong> (Edge Leading only) doesn't affect this calculated distance — it only fine-tunes the too-high/too-low support warnings, by telling the app how high your support's clamp face sits above the support itself.</p>
-
-	<figure>
-	  <img src="assets/Part_3_Edge_trailing_diagram.png" alt="Diagram - Edge Trailing Setup">
-	<!-- <figcaption>Optional caption</figcaption> -->
-	</figure>
-
-        <div class="draft-copy">
-          <span class="fix">If your machine looks different to the above</span>
-          <p>Your grinder doesn't need to look exactly like the ones in the diagrams above — it may not have both edge-leading and edge-trailing features, and the reference point or support may be below the wheel centreline. That doesn't matter — it just needs to share the same measurable relationship to the wheel centreline.</p>
-
-	<p>What does matters is determining the best reference point for your machine, that your two measurements are perpendicular to each other and to the support centreline. If your equipment's geometry runs the "wrong way" relative to the diagram, you don't need different equipment — just flip the sign, using <strong>negative</strong> numbers, as in the worked example below.</p>
-        </div>
-
-        <p><em>Worked example — a slow-speed bench grinder is to be used for honing using paper or felt wheels. A separate mount is fixed to the bench beside <strong>and below</strong> the grinder (in this case on the 'back'-side so edge-trailing), with 'A' = <span class="stat">150&nbsp;mm</span> and 'B' = <span class="stat"><strong>&minus;</strong>100&nbsp;mm</span> (refer the Edge Trailing diagram):</em></p>
-        <div class="callout">
-          <strong>Bench Grinder 1</strong><br>
-          Edge Leading — all fields = <span class="stat">0 </span> <span style="color:var(--muted)">(that is, not used)</span><br>
-          Edge Trailing — Fixed Horizontal = <span class="stat">150</span>, Fixed Vertical = <span class="stat">&minus;100</span>
-        </div>
-
-	<p style="margin-top: 3rem;"><strong>For flat-type grinders</strong> the Add Flat/Belt Machine dialogue and diagram below show this setup is a simple affair. The Vertical Offset default is zero, meaning the reference point by default is at the top of the grinding surface.</p>
-
-	<figure>
-	  <img class="shot-half" src="assets/Part_3_Add_flat_machine.svg" alt="Add New Flat/Belt Machine">
-	  <!-- <figcaption>Optional caption</figcaption> -->
-	</figure>
-
-	<figure>
-	  <img src="assets/Part_3_Flat_grinder_diagram.png" alt="Diagram - Flat/Belt Grinder Setup">
-	<!-- <figcaption>Optional caption</figcaption> -->
-	</figure>
-
-	<p>If you identify a more suitable part of your machine from which you want to measure the support height (as long as that point is measured parallel to the grinding surface), then enter that Vertical Offset. Note that a point <strong>below</strong> the grinding surface is entered as a <strong>positive</strong> number (and just-in-case, use a negative number for above the surface!).</p>
-
-	<p>When a flat-type grinder is selected, the <em>Chord</em> grind type becomes unavailable as this only applies to wheel-type grinders.</p>
-
-        <h3 id="equip-wheels">Wheels</h3>
-        <p>Straightforward — with one convenience: Because a bonded wheel changes diameter in use, wheel diameter can be edited directly from the grind step page, not only through the Menu.</p>
-
-	<figure>
-	  <img class="shot-half" src="assets/Part_3_Add_wheel.svg" alt="Add New Wheel">
-	  <!-- <figcaption>Optional caption</figcaption> -->
-	</figure>
-
-        <h3 id="equip-support-jigs">Support Jigs</h3>
-        <p>Special jigs that add flexibility for mounting a support bar that a blade-jig rests on (Tormek MB-102, or third-party equivalents). As for Machines, the diagram shows the key geometry relationship, and the reference point is what you always use for that equipment.</p>
-
-	<figure>
-	  <img class="shot-half" src="assets/Part_3_Add_new_support_jig.svg" alt="Add New Support Jig">
-	  <!-- <figcaption>Optional caption</figcaption> -->
-	</figure>
-
-	<figure>
-	  <img src="assets/Part_3_Support_jig_diagram.png" alt="Diagram - Support Jig Setup">
-	<!-- <figcaption>Optional caption</figcaption> -->
-	</figure>
-
-	<p>Support jigs are only available for wheel-type edge-trailing grind steps — if you don't have one, leave this as <em>(none)</em>. Selecting a support jig reveals a new field, projection <span class="stat">'X'</span> (shown in the diagram above), which you'll need to enter a value for.</p>
-
-        <figure>
-          <img src="assets/Part_3_Support_jig_features.svg" alt="Support Jig Features">
-	  <figcaption>When a support jig is selected, an additional field appears and a projection 'X' is required (with convenient link to diagram).</figcaption>
-	</figure>
-
-        <h3 id="equip-supports">Supports</h3>
-        <p>The adjustable bar that a blade-jig rests on. Tap <strong>Tormek Std</strong> or <strong>Tormek Ext</strong> as many times as the number you own of each — both stay fully editable afterwards, so you can still fine-tune their measurements — or, for anything else, add a <strong>User</strong> support.</p>
-
-	<figure>
-	  <img class="shot-half" src="assets/Part_3_Add_supports.svg" alt="Add New Support">
-	  <!-- <figcaption>Optional caption</figcaption> -->
-	</figure>
-
-	<p>The following fields support a warning feature in the calculated result where needed, except for a flat-type grinder.</p>
-	<p><em>Total Leg Height = outside - outside dimension of a support leg (that is - top of support to bottom of leg).</em></p>
-	<p><em>Minimum Leg Length for Clamp = the measurement you determine to be the least acceptable clamp length needed for a support on your machine.</em></p>
-	<p><em>Minimum Height = the lowest your support can be, measured from the top of the support to the clamp, accounting for adjustment screws.</em></p>
-
-	<figure>
-	  <img src="assets/Part_3_Supports_annotated.svg" alt="Supports Page">
-	<!-- <figcaption>Optional caption</figcaption> -->
-	</figure>
-
-        <h3 id="equip-se77">Tormek SE-77</h3>
-        <p>Special provision is made for this jig, since it shares geometry usable on both wheel and flat-type grinders. If you have this jig, select "I own this jig" to activate it, then check and enter your measured offset dimensions. Selecting it on a grind step makes Jig Neck Width and Double Bevel unavailable — see Blade &amp; Jig Setup and Grind Type above.</p>
-
-	<figure>
-	  <img class="shot-half" src="assets/Part_3_Tormek_SE77_jig.svg" alt="Tormek SE-77 Jig">
-	  <!-- <figcaption>Optional caption</figcaption> -->
-	</figure>
-
-	<figure>
-	  <img src="assets/Part_3_Tormek_SE77_jig_diagram.png" alt="Diagram - Tormek SE-77 Setup">
-	  <figcaption>Measure from the centre of the support bar to the <em>back</em> of the jig, then the top width, to determine <span class="stat">'A'</span> — and <span class="stat">'B'</span> is to the flat surface the chisel/plane iron clamps against.</figcaption>
-	</figure>
-
-        <figure>
-          <img src="assets/Part_3_Tormek_SE77_page_features.svg" alt="Edge Trailing grind step with the Tormek SE-77 jig selected, showing the locked Jig Neck Width field and disabled Double Bevel option">
-	  <figcaption>Features when the Tormek SE-77 Jig is activated.</figcaption>
-
-        </figure>
-
+	<p><strong>Worth re-checking after your first grind step:</strong> When a burr is developed, and especially after re-profiling a secondary bevel or re-shaping an edge, the angle you actually produce can drift from your target. Check and adjust (if necessary) the <strong>Jig Projection</strong> for that step to bring it back — this will produce a slightly lower <strong>Support Distance 'S'</strong> —so plan on a final light pass at the new setting to finish the step properly. The new <strong>Jig Projection</strong> will carry for all remaining refinement steps.
       </section>
 
       <!-- ============ PART 4 — MENU REFERENCE ============ -->
       <section id="menu-ref">
         <div class="part-break"><span class="tag">Part 4</span><svg viewBox="0 0 400 14"><path d="M0,7 H400"/></svg></div>
-        <h2 class="part-title">Menu reference</h2>
+        <h2 class="part-title">Menu page</h2>
+
+	<figure>
+	  <img src="assets/Guide_5_menu_annotated.svg" alt="Menu Annotated">
+	  <figcaption>Overview of the Menu structure</figcaption>
+	</figure>
+
+        <h3 id="ref-equipment">Equipment</h3>
+        <p>The setup for all equipment—machines, wheels, support jigs, supports, and the Tormek SE-77 jig—is explained in detail on the <a href="equipment.html">Equipment page</a>.</p>
 
         <h3 id="ref-diagrams">Diagrams</h3>
-        <p>Diagrams are provided in the app where necessary to explain or clarify key dimensions for input into a setup, to show key reference dimensions used or generated in a grind step. These diagrams have been provided in Part 3 above, and included here also for convenience.</p>
-
-	<figure>
-	  <img src="assets/Part_3_Edge_leading_diagram.png" alt="Diagram - Edge Leading Setup">
-	  <!-- <figcaption></figcaption> -->
-	</figure>
-
-	<figure>
-	  <img src="assets/Part_3_Edge_trailing_diagram.png" alt="Diagram - Edge Trailing Setup">
-	  <!-- <figcaption></figcaption> -->
-	</figure>
-
-	<figure>
-	  <img src="assets/Part_3_Flat_grinder_diagram.png" alt="Diagram - Flat/Belt Grinder Setup">
-	  <!-- <figcaption></figcaption> -->
-	</figure>
-
-	<figure>
-	  <img src="assets/Part_3_Support_jig_diagram.png" alt="Diagram - Support Jig Setup">
-	  <!-- <figcaption></figcaption> -->
-	</figure>
-
-	<figure>
-	  <img src="assets/Part_3_Tormek_SE77_jig_diagram.png" alt="Diagram - Tormek SE-77 Setup">
-	  <!-- <figcaption></figcaption> -->
-	</figure>
+        <p>Every diagram already appears in context on the <a href="equipment.html">Equipment page</a>, right alongside the fields it explains. If you just want the full set at a glance while you're mid-measurement, open <strong>Menu → Diagrams</strong> in the app itself.</p>
 
         <h3 id="ref-notes">Notes</h3>
-        <p>A condensed version of these guidelines is provided in the JigSteps app. This website guide is the companion to the app.</p>
+        <p>A condensed version of this Guide and the Equipment page are provided in the JigSteps app. These web pages are companions to the app.</p>
 
         <h3 id="ref-diary">Knife Diary</h3>
         <p>Track every knife you sharpen in one place — owner, make and model, blade material and Rockwell hardness, date last sharpened, BESS scores before and after, target DPS and jig projection, blade thickness, grind steps involved, and your own notes.</p>
@@ -573,50 +421,50 @@
 	<p>Search by owner, make, or model at any time. Either by itself or together with search, sort by Owner or Make, both ascending or descending order.</p>
 
 	<figure>
-	  <img src="assets/Part_4_Knife_diary_page.svg" alt="Knife Diary Page">
-	  <figcaption>Sample information shown - names may be fictional, or otherwise purely conincidental!</figcaption>
+	  <img src="assets/Guide_6_knife_diary_page.svg" alt="Knife Diary Page">
+	  <figcaption>Sample information shown - names may be fictional, or otherwise purely coincidental!</figcaption>
 	</figure>
 
 	<p>Rockwell HRC, BESS numbers, Grind Angle, Jig Projection and BTE thickness use numerical entries. Date Last Sharpened format is dd-mmm-yyy, for example, 21-Jan-2026. All other fields are free-form text, so you're not constrained to a particular format.</p>
 
 	<figure>
 	  <div class="shot-row">
-	    <img src="assets/Part_4_Add_knife_upper.svg" alt="Add Knife Diary Entry - Upper">
-	    <img src="assets/Part_4_Add_knife_lower.svg" alt="Add Knife Diary Entry - Lower">
+	    <img src="assets/Guide_7_add_knife_upper.svg" alt="Add Knife Diary Entry - Upper">
+	    <img src="assets/Guide_8_add_knife_lower.svg" alt="Add Knife Diary Entry - Lower">
 	  </div>
 	  <figcaption>These shown the upper (left) and lower (right) parts of the same page. "Notes" is not shown in lower image for page readability.</figcaption>
 	</figure>
 
-        <p>Export your whole diary to CSV (opens in Excel or similar software) whenever and to wherever you like, using your device's own file picker — no special permissions needed. Import works the same way in reverse: entries are added alongside what's already there, never overwriting or removing existing records.</p>
+        <p>Export your whole diary to CSV (opens in Excel or similar software) whenever and to wherever you like, using your device's own file picker — no special permissions needed. Import works the same way in reverse; entries are added alongside what's already there, never overwriting or removing existing records.</p>
 
 	<p>You could, for example, export your records, open in Excel, and add other records to your JigSteps app if you wish; simply add rows but keep the headings untouched (<strong>and be sure to delete existing records from the CSV file - if you don't you will double-up existing entries</strong>).</p>
 
 	<figure>
-	  <img src="assets/Part_4_Knife_upload.svg" alt="Knife Diary Upload Page">
-	  <figcaption>Your Google Drive folder (outside app).</figcaption>
+	  <img src="assets/Guide_9_knife_upload.svg" alt="Knife Diary Upload Page">
+	  <figcaption>Upload Example: Your Google Drive folder (outside app).</figcaption>
 	</figure>
 
 	<figure>
-	  <img src="assets/Part_4_Knife_download.svg" alt="Knife Diary Download Page">
-	  <figcaption>Your Google Drive folder (outside app).</figcaption>
+	  <img src="assets/Guide_10_knife_download.svg" alt="Knife Diary Download Page">
+	  <figcaption>Download Example: Your Google Drive folder (outside app).</figcaption>
 	</figure>
 
         <h3 id="ref-settings">Settings / About</h3>
-        <p>You have some choice to suit your preferences, and in-app information already provided by this website is shown here too.</p>
+        <p>You have some choice to suit your preferences, and in-app information already provided by this web site is shown here too.</p>
 
 	<figure>
-	  <img class="shot-half" src="assets/Part_4_Settings_about.svg" alt="Settings / About">
+	  <img class="shot-half" src="assets/Guide_11_settings_about.svg" alt="Settings / About">
 	  <!-- <figcaption>Optional caption</figcaption> -->
 	</figure>
 
-	<p>Appearance - System / Light / Dark</p>
+	<p>Appearance - System / Light / Dark.</p>
 	<p>Units - Metric (mm) or Imperial (inch) - defaults are set in metric so imperial is a converted display and may seem odd (until you change them)!</p>
-	<p>Decimal separator - period (.) or comma (,)</p>
+	<p>Decimal separator - period (.) or comma (,).</p>
 
 	<figure>
 	  <div class="shot-row">
-	    <img src="assets/Part_4_Theme_light.svg" alt="Light Colour Theme">
-	    <img src="assets/Part_4_Theme_dark.svg" alt="Dark Colour Theme">
+	    <img src="assets/Guide_12_theme_light.svg" alt="Light Colour Theme">
+	    <img src="assets/Guide_13_theme_dark.svg" alt="Dark Colour Theme">
 	  </div>
 	<figcaption>Light and Dark colour themes.</figcaption>
 	</figure>
@@ -634,7 +482,8 @@
     </div>
     <div class="footer-links">
       <a href="guide.html">Guide</a>
-      <a href="calculator_T8_setup.html">Setup Calculator</a>
+      <a href="equipment.html">Equipment</a>
+      <a href="calculator.html">Setup Calculator</a>
       <a href="changelog.html">Changelog</a>
       <a href="privacy.html">Privacy Policy</a>
       <a href="contact.html">Contact</a>
@@ -643,25 +492,99 @@
 </footer>
 
 <script>
-  // Lightweight scroll-spy — highlights the current section in the sticky TOC.
-  const links = Array.from(document.querySelectorAll('nav.toc a'));
-  const targets = links
-    .map(a => document.getElementById(a.getAttribute('href').slice(1)))
+  // TOC hand-off positions, measured from the bottom of .topbar.
+  // Down: activate a new heading once it reaches this position.
+  // Up: return to the previous heading only when it reaches this position.
+  const DOWN_OFFSET = 112;
+  const UP_OFFSET = 48;
+
+  const tocLinks = Array.from(document.querySelectorAll('nav.toc a'));
+
+  const tocItems = tocLinks
+    .map(link => {
+      const href = link.getAttribute('href');
+
+      if (!href || !href.startsWith('#')) {
+        return null;
+      }
+
+      const target = document.getElementById(href.slice(1));
+
+      return target ? { link, target } : null;
+    })
     .filter(Boolean);
 
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      const id = entry.target.id;
-      const link = links.find(a => a.getAttribute('href') === '#' + id);
-      if (!link) return;
-      if (entry.isIntersecting) {
-        links.forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
-      }
-    });
-  }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 });
+  let lastScrollY = window.scrollY;
+  let scrollDirection = 'down';
 
-  targets.forEach(t => io.observe(t));
+  function getTopbarBottom() {
+    const topbar = document.querySelector('.topbar');
+    return topbar ? topbar.getBoundingClientRect().bottom : 0;
+  }
+
+  function getActiveIndex(readingLine) {
+    let activeIndex = 0;
+
+    for (let index = 0; index < tocItems.length; index += 1) {
+      if (tocItems[index].target.getBoundingClientRect().top <= readingLine) {
+        activeIndex = index;
+      } else {
+        break;
+      }
+    }
+
+    return activeIndex;
+  }
+
+  function updateActiveLink() {
+    const topbarBottom = getTopbarBottom();
+    const offset = scrollDirection === 'down'
+      ? DOWN_OFFSET
+      : UP_OFFSET;
+
+    const activeIndex = getActiveIndex(topbarBottom + offset);
+    const activeLink = tocItems[activeIndex].link;
+
+    tocLinks.forEach(link => {
+ 	link.classList.toggle('active', link === activeLink);
+	});
+
+	activeLink.scrollIntoView({
+	 block: 'nearest',
+	 inline: 'nearest',
+	 behavior: 'auto'
+	});
+  }
+
+  let ticking = false;
+
+  function requestUpdate() {
+    const currentScrollY = window.scrollY;
+
+    if (currentScrollY > lastScrollY) {
+      scrollDirection = 'down';
+    } else if (currentScrollY < lastScrollY) {
+      scrollDirection = 'up';
+    }
+
+    lastScrollY = currentScrollY;
+
+    if (ticking) {
+      return;
+    }
+
+    ticking = true;
+
+    requestAnimationFrame(() => {
+      updateActiveLink();
+      ticking = false;
+    });
+  }
+
+  window.addEventListener('scroll', requestUpdate, { passive: true });
+  window.addEventListener('resize', requestUpdate);
+
+  updateActiveLink();
 </script>
 
 </body>
